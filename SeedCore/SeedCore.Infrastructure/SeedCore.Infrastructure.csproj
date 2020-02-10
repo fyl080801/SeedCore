@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OrchardCore" Version="1.0.0-rc1-10004" />
+    <PackageReference Include="OrchardCore.Infrastructure.Abstractions" Version="1.0.0-rc1-10004" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SeedCore.Data\SeedCore.Data.csproj" />
+  </ItemGroup>
+
+</Project>

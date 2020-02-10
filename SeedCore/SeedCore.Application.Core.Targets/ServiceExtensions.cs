@@ -12,17 +12,13 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddSeedCore(this IServiceCollection services, Action<OrchardCoreBuilder> configure)
         {
             var builder = services.AddOrchardCore()
-
                 .AddCommands()
-
                 .AddMvc()
-                .AddSetupFeatures("SeedModules.Setup");
-
-            // .AddDataAccess()
-            // .AddDataStorage()
-            // .AddBackgroundService();
-
-            // .AddCaching();
+                .AddSetupFeatures("SeedModules.Setup")
+                .AddDataContext()
+                .AddShellDataStorage()
+                .AddBackgroundService()
+                .AddCaching();
 
             builder.ConfigureServices(s => { });
 

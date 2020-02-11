@@ -10,4 +10,8 @@
     <PackageReference Include="OrchardCore.Setup.Abstractions" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SeedCore.Data.Abstractions\SeedCore.Data.Abstractions.csproj" />
+  </ItemGroup>
+
 </Project>

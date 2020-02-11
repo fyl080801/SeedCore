@@ -17,6 +17,7 @@ using OrchardCore.Recipes.Models;
 using OrchardCore.Recipes.Services;
 using OrchardCore.Setup.Events;
 using OrchardCore.Setup.Services;
+using SeedCore.Data;
 
 namespace SeedCore.Setup.Services
 {
@@ -86,7 +87,7 @@ namespace SeedCore.Setup.Services
 
         public async Task<string> SetupInternalAsync(SetupContext context)
         {
-            string executionId = "";
+            string executionId;
 
             if (_logger.IsEnabled(LogLevel.Information))
             {
@@ -133,57 +134,58 @@ namespace SeedCore.Setup.Services
 
             using (var shellContext = await _shellContextFactory.CreateDescribedContextAsync(shellSettings, shellDescriptor))
             {
-                // await shellContext.CreateScope().UsingAsync(async scope =>
-                // {
-                //     IStore store;
+                await shellContext.CreateScope().UsingAsync(async scope =>
+                {
+                    IStore store;
 
-                //     try
-                //     {
-                //         store = scope.ServiceProvider.GetRequiredService<IStore>();
-                //     }
-                //     catch (Exception e)
-                //     {
-                //         // Tables already exist or database was not found
+                    try
+                    {
+                        store = scope.ServiceProvider.GetRequiredService<IStore>();
+                        await store.InitializeAsync(scope.ServiceProvider);
+                    }
+                    catch (Exception e)
+                    {
+                        // Tables already exist or database was not found
 
-                //         // The issue is that the user creation needs the tables to be present,
-                //         // if the user information is not valid, the next POST will try to recreate the
-                //         // tables. The tables should be rolled back if one of the steps is invalid,
-                //         // unless the recipe is executing?
+                        // The issue is that the user creation needs the tables to be present,
+                        // if the user information is not valid, the next POST will try to recreate the
+                        // tables. The tables should be rolled back if one of the steps is invalid,
+                        // unless the recipe is executing?
 
-                //         _logger.LogError(e, "An error occurred while initializing the datastore.");
-                //         context.Errors.Add("DatabaseProvider", T["An error occurred while initializing the datastore: {0}", e.Message]);
-                //         return;
-                //     }
+                        _logger.LogError(e, "An error occurred while initializing the datastore.");
+                        context.Errors.Add("DatabaseProvider", T["An error occurred while initializing the datastore: {0}", e.Message]);
+                        return;
+                    }
 
-                //     // Create the "minimum shell descriptor"
-                //     await scope
-                //         .ServiceProvider
-                //         .GetService<IShellDescriptorManager>()
-                //         .UpdateShellDescriptorAsync(0,
-                //             shellContext.Blueprint.Descriptor.Features,
-                //             shellContext.Blueprint.Descriptor.Parameters);
-                // });
+                    // Create the "minimum shell descriptor"
+                    await scope
+                        .ServiceProvider
+                        .GetService<IShellDescriptorManager>()
+                        .UpdateShellDescriptorAsync(0,
+                            shellContext.Blueprint.Descriptor.Features,
+                            shellContext.Blueprint.Descriptor.Parameters);
+                });
 
-                // if (context.Errors.Any())
-                // {
-                //     return null;
-                // }
+                if (context.Errors.Any())
+                {
+                    return null;
+                }
 
-                // executionId = Guid.NewGuid().ToString("n");
+                executionId = Guid.NewGuid().ToString("n");
 
-                // var recipeExecutor = shellContext.ServiceProvider.GetRequiredService<IRecipeExecutor>();
+                var recipeExecutor = shellContext.ServiceProvider.GetRequiredService<IRecipeExecutor>();
 
-                // await recipeExecutor.ExecuteAsync(executionId, context.Recipe, new
-                // {
-                //     SiteName = context.SiteName,
-                //     AdminUsername = context.AdminUsername,
-                //     AdminEmail = context.AdminEmail,
-                //     AdminPassword = context.AdminPassword,
-                //     DatabaseProvider = context.DatabaseProvider,
-                //     DatabaseConnectionString = context.DatabaseConnectionString,
-                //     DatabaseTablePrefix = context.DatabaseTablePrefix
-                // },
-                // _applicationLifetime.ApplicationStopping);
+                await recipeExecutor.ExecuteAsync(executionId, context.Recipe, new
+                {
+                    SiteName = context.SiteName,
+                    AdminUsername = context.AdminUsername,
+                    AdminEmail = context.AdminEmail,
+                    AdminPassword = context.AdminPassword,
+                    DatabaseProvider = context.DatabaseProvider,
+                    DatabaseConnectionString = context.DatabaseConnectionString,
+                    DatabaseTablePrefix = context.DatabaseTablePrefix
+                },
+                _applicationLifetime.ApplicationStopping);
             }
 
             // Reloading the shell context as the recipe  has probably updated its features

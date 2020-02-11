@@ -23,7 +23,6 @@ namespace SeedCore.Data.Migrations
         const string ContextAssembly = "Seed.Data.Migration";
         const string SnapshotName = "ModuleDbSnapshot";
 
-        [Obsolete]
         public async Task RunAsync(IDbContext context)
         {
             IModel lastModel = null;
@@ -48,7 +47,7 @@ namespace SeedCore.Data.Migrations
             {
                 var upOperations = modelDiffer.GetDifferences(lastModel, context.Context.Model);
 
-                using (var trans = context.Context.Database.BeginTransaction())
+                using (var transaction = context.Context.Database.BeginTransaction())
                 {
                     try
                     {
@@ -56,16 +55,15 @@ namespace SeedCore.Data.Migrations
                             .GetRequiredService<IMigrationsSqlGenerator>()
                             .Generate(upOperations, context.Context.Model)
                             .ToList()
-                            .ForEach(cmd => context.Context.Database.ExecuteSqlCommand(cmd.CommandText));
+                            .ForEach(command => context.Context.Database.ExecuteSqlRaw(command.CommandText));
 
-                        context.Context.Database.CommitTransaction();
+                        transaction.Commit();
                     }
                     catch (DbException ex)
                     {
-                        context.Context.Database.RollbackTransaction();
+                        transaction.Rollback();
                         throw ex;
                     }
-
 
                     string snapshotCode = new DesignTimeServicesBuilder(context.GetType().Assembly, context.GetType().Assembly, new ModuleDbOperationReporter(), new string[0])
                         .Build((DbContext)context)

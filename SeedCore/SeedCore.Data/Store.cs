@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -6,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using OrchardCore.Environment.Shell;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Pomelo.EntityFrameworkCore.MySql.Storage;
-using SeedCore.Data.Migrations;
 
 namespace SeedCore.Data
 {
@@ -47,12 +47,14 @@ namespace SeedCore.Data
                 case "SqlConnection":
                     optionBuilder.UseSqlServer(_settings["ConnectionString"], ob =>
                     {
+                        ob.MigrationsHistoryTable($"{_settings["TablePrefix"]}_Migrations_");
                         // ob.UseRowNumberForPaging(true);
                     });
                     break;
                 case "MySql":
                     optionBuilder.UseMySql(_settings["ConnectionString"], ob =>
                     {
+                        ob.MigrationsHistoryTable($"{_settings["TablePrefix"]}_Migrations_");
                         ob.CharSetBehavior(CharSetBehavior.AppendToAllColumns);
                         ob.CharSet(CharSet.Utf8Mb4);
                     });
@@ -73,8 +75,12 @@ namespace SeedCore.Data
 
         public async Task InitializeAsync(IServiceProvider service)
         {
-            await CreateDbContext().Context.Database.MigrateAsync();
-            await service.GetService<IDataMigrationManager>().UpdateAllFeaturesAsync();
+            var database = CreateDbContext().Context.Database;
+            if ((await database.GetPendingMigrationsAsync()).Any())
+            {
+                await database.MigrateAsync();
+            }
+            // await service.GetService<IDataMigrationManager>().UpdateAllFeaturesAsync();
         }
     }
 }

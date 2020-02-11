@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OrchardCore.Abstractions" Version="1.0.0-rc1-10004" />
-    <PackageReference Include="OrchardCore.Recipes.Abstractions" Version="1.0.0-rc1-10004" />
-    <PackageReference Include="OrchardCore.Setup.Abstractions" Version="1.0.0-rc1-10004" />
+    <PackageReference Include="OrchardCore.Abstractions" />
+    <PackageReference Include="OrchardCore.Recipes.Abstractions" />
+    <PackageReference Include="OrchardCore.Setup.Abstractions" />
   </ItemGroup>
 
 </Project>

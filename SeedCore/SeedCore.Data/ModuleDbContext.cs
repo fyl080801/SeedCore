@@ -28,7 +28,7 @@ namespace SeedCore.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new MigrationTypeConfiguration());
+            // modelBuilder.ApplyConfiguration(new MigrationTypeConfiguration());
 
             foreach (var configuration in _entityConfigurations)
             {

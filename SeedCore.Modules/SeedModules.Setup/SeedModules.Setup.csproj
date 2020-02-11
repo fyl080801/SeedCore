@@ -1,12 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <ItemGroup>
-    <PackageReference Include="OrchardCore.Module.Targets" Version="1.0.0-rc1-10004" />
-    <ProjectReference Include="..\..\SeedCore\SeedCore.Setup.Core\SeedCore.Setup.Core.csproj" />
-  </ItemGroup>
-
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OrchardCore.Module.Targets" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SeedCore\SeedCore.Setup.Core\SeedCore.Setup.Core.csproj" />
+  </ItemGroup>
 
 </Project>

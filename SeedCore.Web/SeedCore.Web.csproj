@@ -20,8 +20,7 @@
   </ItemGroup>
 
   <!-- Necessary as we reference the Project and not the Package -->
-  <Import Project="..\SeedCore\SeedCore.Application.Core.Targets\SeedCore.Application.Targets.targets" />
-
+  <Import Project="..\SeedCore.Build\SeedCore.Application.Targets.targets" />
   <Import Project="..\SeedCore.Build\SeedCore.Commons.targets" />
 
 </Project>

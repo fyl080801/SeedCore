@@ -12,10 +12,6 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             builder.ConfigureServices(services =>
             {
-                services.AddScoped<IDataMigrationManager, DataMigrationManager>();
-                services.AddScoped<IModularTenantEvents, AutoDataMigration>();
-                services.AddScoped<IDataMigrator, DataMigrator>();
-
                 services.TryAddDataProvider(name: "Microsoft SQLServer", provider: "SqlConnection");
                 services.TryAddDataProvider(name: "MySql Database", provider: "MySql");
 

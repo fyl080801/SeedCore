@@ -73,7 +73,7 @@ namespace SeedCore.Data
             return optionBuilder.Options;
         }
 
-        public async Task InitializeAsync(IServiceProvider service)
+        public async Task InitializeAsync()
         {
             var database = CreateDbContext().Context.Database;
             if ((await database.GetPendingMigrationsAsync()).Any())

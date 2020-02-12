@@ -8,7 +8,7 @@ using OrchardCore.Features.Services;
 using OrchardCore.Recipes;
 using SeedModules.Features.Services;
 
-namespace OrchardCore.Features
+namespace SeedModules.Features
 {
     /// <summary>
     /// These services are registered on the tenant service collection

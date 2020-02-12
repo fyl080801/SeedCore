@@ -141,7 +141,7 @@ namespace SeedCore.Setup.Services
                     try
                     {
                         store = scope.ServiceProvider.GetRequiredService<IStore>();
-                        await store.InitializeAsync(scope.ServiceProvider);
+                        await store.InitializeAsync();
                     }
                     catch (Exception e)
                     {

@@ -28,6 +28,6 @@ namespace SeedCore.Data
         /// </summary>
         /// <param name="service"></param>
         /// <returns></returns>
-        Task InitializeAsync(IServiceProvider service);
+        Task InitializeAsync();
     }
 }

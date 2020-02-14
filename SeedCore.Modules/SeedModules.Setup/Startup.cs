@@ -16,6 +16,7 @@ using OrchardCore.Environment.Shell.Configuration;
 using OrchardCore.Modules;
 using SeedCore.Setup;
 using SeedModules.Setup.Middleware;
+using SeedModules.Setup.Extensions;
 
 namespace SeedModules.Setup
 {
@@ -35,11 +36,11 @@ namespace SeedModules.Setup
                 pattern: "",
                 defaults: new { controller = "Setup", action = "Index" }
             );
-            var x = Assembly.GetExecutingAssembly();
-            // if (serviceProvider.GetService<IHostEnvironment>().IsDevelopment())
-            // {
-            //     app.UseMiddleware<ProxyMiddleware>();
-            // }
+
+            app.UseSpa(builder =>
+            {
+                builder.UseSeedSpaDevelopmentServer("serve");
+            });
         }
     }
 }

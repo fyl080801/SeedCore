@@ -5,11 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" />
+    <PackageReference Include="Microsoft.AspNetCore.NodeServices" />
     <PackageReference Include="OrchardCore.Module.Targets" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\SeedCore\SeedCore.Setup.Core\SeedCore.Setup.Core.csproj" />
+    <ProjectReference Include="..\..\SeedCore\SeedCore.SpaService.Targets\SeedCore.SpaService.Targets.csproj" />
   </ItemGroup>
 
 </Project>

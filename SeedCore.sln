@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedCore.Data.Abstractions"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedCore.Data", "SeedCore\SeedCore.Data\SeedCore.Data.csproj", "{8182C486-2C0E-41B9-85B2-39F881481D86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedCore.SpaService.Targets", "SeedCore\SeedCore.SpaService.Targets\SeedCore.SpaService.Targets.csproj", "{9928ED45-3C9D-4357-A0FE-CD34B13031D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedCore.SpaService.Core", "SeedCore\SeedCore.SpaService.Core\SeedCore.SpaService.Core.csproj", "{9928ED45-3C9D-4357-A0FE-CD34B13031D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

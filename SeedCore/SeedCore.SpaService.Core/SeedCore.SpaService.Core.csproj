@@ -9,4 +9,9 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" />
+  </ItemGroup>
+
 </Project>

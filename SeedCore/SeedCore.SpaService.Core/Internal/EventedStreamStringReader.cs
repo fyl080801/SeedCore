@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace SeedCore.SpaService.Core.Internal
+namespace SeedCore.SpaService.Internal
 {
     internal class EventedStreamStringReader : IDisposable
     {

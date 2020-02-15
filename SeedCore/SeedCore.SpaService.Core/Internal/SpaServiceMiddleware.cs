@@ -10,20 +10,21 @@ using Microsoft.AspNetCore.SpaServices;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using SeedCore.SpaService.Core.Internal;
 
-namespace SeedCore.SpaService.Core.Extensions
+namespace SeedCore.SpaService.Internal
 {
     internal static class SpaServiceMiddleware
     {
         private const string LogCategoryName = "SeedCore.SpaService";
         private static TimeSpan RegexMatchTimeout = TimeSpan.FromSeconds(30);
 
-        public static void Attach(ISpaBuilder spaBuilder, string sourcePath, string scriptName)
+        public static void Attach(
+            ISpaBuilder spaBuilder,
+            string sourcePath,
+            string pkgManagerCommand,
+            string scriptName,
+            int devServerPort)
         {
-            var pkgManagerCommand = "npm";
-            var devServerPort = default(int);
-
             if (string.IsNullOrEmpty(scriptName))
             {
                 throw new ArgumentException("Cannot be null or empty", nameof(scriptName));
@@ -33,7 +34,14 @@ namespace SeedCore.SpaService.Core.Extensions
             var applicationStoppingToken = appBuilder.ApplicationServices.GetRequiredService<IHostApplicationLifetime>().ApplicationStopping;
             var logger = LoggerFinder.GetOrCreateLogger(appBuilder, LogCategoryName);
             var diagnosticSource = appBuilder.ApplicationServices.GetRequiredService<DiagnosticSource>();
-            var portTask = StartCreateReactAppServerAsync(sourcePath, scriptName, pkgManagerCommand, devServerPort, logger, diagnosticSource, applicationStoppingToken);
+            var portTask = StartCreateReactAppServerAsync(
+                sourcePath,
+                scriptName,
+                pkgManagerCommand,
+                devServerPort,
+                logger,
+                diagnosticSource,
+                applicationStoppingToken);
 
             var targetUriTask = portTask.ContinueWith(
                 task => new UriBuilder("http", "localhost", task.Result).Uri);
@@ -42,14 +50,20 @@ namespace SeedCore.SpaService.Core.Extensions
             {
                 var timeout = spaBuilder.Options.StartupTimeout;
                 return targetUriTask.WithTimeout(timeout,
-                    $"The create-react-app server did not start listening for requests " +
+                    $"The server did not start listening for requests " +
                     $"within the timeout period of {timeout.Seconds} seconds. " +
                     $"Check the log output for error information.");
             });
         }
 
         private static async Task<int> StartCreateReactAppServerAsync(
-            string sourcePath, string scriptName, string pkgManagerCommand, int portNumber, ILogger logger, DiagnosticSource diagnosticSource, CancellationToken applicationStoppingToken)
+            string sourcePath,
+            string scriptName,
+            string pkgManagerCommand,
+            int portNumber,
+            ILogger logger,
+            DiagnosticSource diagnosticSource,
+            CancellationToken applicationStoppingToken)
         {
             if (portNumber == default(int))
             {

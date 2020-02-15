@@ -1,7 +1,7 @@
 using System.Net;
 using System.Net.Sockets;
 
-namespace SeedCore.SpaService.Core.Internal
+namespace SeedCore.SpaService.Internal
 {
     internal static class TcpPortFinder
     {

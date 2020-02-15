@@ -10,8 +10,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.SpaServices" />
-    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" />
+    <PackageReference Include="OrchardCore.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SeedCore.SpaService.Abstractions\SeedCore.SpaService.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

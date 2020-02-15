@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using OrchardCore.Modules;
 using SeedCore.Setup;
-using SeedCore.SpaService.Core.Extensions;
 
 namespace SeedModules.Setup
 {
@@ -14,6 +13,7 @@ namespace SeedModules.Setup
         public override void ConfigureServices(IServiceCollection services)
         {
             services.AddSetup();
+            services.AddSeedSpaService();
         }
 
         public override void Configure(IApplicationBuilder app, IEndpointRouteBuilder routes, IServiceProvider serviceProvider)
@@ -25,10 +25,7 @@ namespace SeedModules.Setup
                 defaults: new { controller = "Setup", action = "Index" }
             );
 
-            app.UseSpa(builder =>
-            {
-                builder.UseSeedSpaDevelopmentServer("serve");
-            });
+            app.UseSeedSpaService("serve");
         }
     }
 }

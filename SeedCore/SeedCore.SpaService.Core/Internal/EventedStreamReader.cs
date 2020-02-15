@@ -4,7 +4,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace SeedCore.SpaService.Core.Internal
+namespace SeedCore.SpaService.Internal
 {
     internal class EventedStreamReader
     {

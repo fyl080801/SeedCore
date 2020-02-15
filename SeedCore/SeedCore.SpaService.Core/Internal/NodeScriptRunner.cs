@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using Microsoft.Extensions.Logging;
 
-namespace SeedCore.SpaService.Core.Internal
+namespace SeedCore.SpaService.Internal
 {
     internal class NodeScriptRunner : IDisposable
     {

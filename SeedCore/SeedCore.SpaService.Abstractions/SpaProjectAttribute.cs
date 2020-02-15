@@ -1,6 +1,6 @@
 using System;
 
-namespace SeedCore.SpaService.Core
+namespace SeedCore.SpaService
 {
     public class SpaProjectAttribute : Attribute
     {

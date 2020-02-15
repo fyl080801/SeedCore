@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace SeedCore.SpaService.Core.Internal
+namespace SeedCore.SpaService.Internal
 {
     internal static class LoggerFinder
     {

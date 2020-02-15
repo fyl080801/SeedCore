@@ -23,7 +23,7 @@
 
     <Target Name="ResolveSpa" AfterTargets="AfterResolveReferences">
         <ItemGroup>
-            <AssemblyAttribute Include="SeedCore.SpaService.Core.SpaProjectAttribute" Condition=" '$(Configuration)' == 'Debug' And Exists('$(SpaRoot)')">
+            <AssemblyAttribute Include="SeedCore.SpaService.SpaProjectAttribute" Condition=" '$(Configuration)' == 'Debug' And Exists('$(SpaRoot)')">
                 <_Parameter1>$(ProjectDir)</_Parameter1>
                 <_Parameter2>$(SpaRoot)</_Parameter2>
             </AssemblyAttribute>

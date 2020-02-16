@@ -4,8 +4,17 @@ namespace SeedCore.SpaService
 {
     public class DefaultSpaBuilder : ISeedSpaBuilder
     {
-        public IApplicationBuilder ApplicationBuilder => throw new System.NotImplementedException();
+        private IApplicationBuilder _application;
+        private SeedSpaOptions _options;
 
-        public SeedSpaOptions Options => throw new System.NotImplementedException();
+        public DefaultSpaBuilder(IApplicationBuilder application, SeedSpaOptions options)
+        {
+            _application = application;
+            _options = options;
+        }
+
+        public IApplicationBuilder ApplicationBuilder => _application;
+
+        public SeedSpaOptions Options => _options;
     }
 }

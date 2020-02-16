@@ -14,12 +14,13 @@ namespace SeedModules.Setup.Controllers
 
         public IActionResult Index()
         {
-            return Content("aaa");
+            return View();
         }
 
+        [HttpGet]
         public IActionResult Text()
         {
-            return Content("aaaasdsdsd");
+            return Json(new { text = "aaaa" });
         }
     }
 }

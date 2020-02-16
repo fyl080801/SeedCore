@@ -19,12 +19,13 @@ namespace SeedCore.SpaService.Internal
         private static TimeSpan RegexMatchTimeout = TimeSpan.FromSeconds(30);
 
         public static void Attach(
-            ISpaBuilder spaBuilder,
+            ISeedSpaBuilder spaBuilder,
             string sourcePath,
-            string pkgManagerCommand,
-            string scriptName,
-            int devServerPort)
+            string scriptName)
         {
+            var pkgManagerCommand = spaBuilder.Options.PkgManagerCommand;
+            var devServerPort = spaBuilder.Options.DevServerPort;
+
             if (string.IsNullOrEmpty(scriptName))
             {
                 throw new ArgumentException("Cannot be null or empty", nameof(scriptName));
@@ -34,7 +35,7 @@ namespace SeedCore.SpaService.Internal
             var applicationStoppingToken = appBuilder.ApplicationServices.GetRequiredService<IHostApplicationLifetime>().ApplicationStopping;
             var logger = LoggerFinder.GetOrCreateLogger(appBuilder, LogCategoryName);
             var diagnosticSource = appBuilder.ApplicationServices.GetRequiredService<DiagnosticSource>();
-            var portTask = StartCreateReactAppServerAsync(
+            var portTask = StartCreateAppServerAsync(
                 sourcePath,
                 scriptName,
                 pkgManagerCommand,
@@ -46,7 +47,7 @@ namespace SeedCore.SpaService.Internal
             var targetUriTask = portTask.ContinueWith(
                 task => new UriBuilder("http", "localhost", task.Result).Uri);
 
-            SpaProxyingExtensions.UseProxyToSpaDevelopmentServer(spaBuilder, () =>
+            SeedSpaBuilderExtensions.UseProxyToSpaDevelopmentServer(spaBuilder, () =>
             {
                 var timeout = spaBuilder.Options.StartupTimeout;
                 return targetUriTask.WithTimeout(timeout,
@@ -56,7 +57,7 @@ namespace SeedCore.SpaService.Internal
             });
         }
 
-        private static async Task<int> StartCreateReactAppServerAsync(
+        private static async Task<int> StartCreateAppServerAsync(
             string sourcePath,
             string scriptName,
             string pkgManagerCommand,

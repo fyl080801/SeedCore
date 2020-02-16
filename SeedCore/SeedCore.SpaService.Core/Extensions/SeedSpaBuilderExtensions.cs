@@ -1,18 +1,41 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Hosting;
-using SeedCore.SpaService.Internal;
 using System;
+using System.IO;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Hosting;
 using OrchardCore.Environment.Shell.Builders;
+using SeedCore.SpaService;
+using SeedCore.SpaService.Internal;
 
-namespace Microsoft.AspNetCore.SpaServices
+namespace Microsoft.Extensions.DependencyInjection
 {
-    public static class SpaBuilderExtensions
+    public static class SeedSpaBuilderExtensions
     {
+        public static void UseSpaDevelopmentServer(this ISeedSpaBuilder spaBuilder, string npmScript)
+        {
+            if (spaBuilder == null)
+            {
+                throw new ArgumentNullException(nameof(spaBuilder));
+            }
+
+            // object script = spaBuilder.Options;
+            var attribute = Assembly.GetCallingAssembly().GetCustomAttribute<SpaProjectAttribute>();
+
+            SpaServiceMiddleware.Attach(spaBuilder, Path.Combine(attribute.Project, attribute.Path), npmScript);
+        }
+
+        // public static void MapAreaControllerRoute(this ISeedSpaBuilder spaBuilder, string name, string areaName, string pattern, object defaults = null, object constraints = null, object dataTokens = null)
+        // {
+
+        //     spaBuilder.ApplicationBuilder.ApplicationServices.GetService<IEndpointRouteBuilder>().MapAreaControllerRoute(name, areaName, pattern, defaults, constraints);
+        // }
+
         public static void UseProxyToSpaDevelopmentServer(
-            this ISpaBuilder spaBuilder,
+            this ISeedSpaBuilder spaBuilder,
             string baseUri)
         {
             UseProxyToSpaDevelopmentServer(
@@ -21,7 +44,7 @@ namespace Microsoft.AspNetCore.SpaServices
         }
 
         public static void UseProxyToSpaDevelopmentServer(
-            this ISpaBuilder spaBuilder,
+            this ISeedSpaBuilder spaBuilder,
             Uri baseUri)
         {
             UseProxyToSpaDevelopmentServer(
@@ -30,13 +53,17 @@ namespace Microsoft.AspNetCore.SpaServices
         }
 
         public static void UseProxyToSpaDevelopmentServer(
-                    this ISpaBuilder spaBuilder,
-                    Func<Task<Uri>> baseUriTaskFactory)
+            this ISeedSpaBuilder spaBuilder,
+            Func<Task<Uri>> baseUriTaskFactory)
         {
             var applicationBuilder = spaBuilder.ApplicationBuilder;
             var applicationStoppingToken = GetStoppingToken(applicationBuilder);
-            var shellContext = spaBuilder.ApplicationBuilder.ApplicationServices.GetService<ShellContext>();
+            // 用于提取path和referer里的tenantPrefix
+            // var shellContext = spaBuilder.ApplicationBuilder.ApplicationServices.GetService<ShellContext>();
 
+            // var routeBuilder = spaBuilder.ApplicationBuilder.ApplicationServices.GetService<IRouteBuilder>();
+            
+            
             applicationBuilder.UseWebSockets();
 
             var neverTimeOutHttpClient =
@@ -44,28 +71,30 @@ namespace Microsoft.AspNetCore.SpaServices
 
             applicationBuilder.Use(async (context, next) =>
             {
-                // bool isSpaRequest = ComparePath(shellContext.Settings.RequestUrlPrefix, context.Request.Path.Value, "");
-
-                // if (isSpaRequest)
-                // {
-                //     await SpaProxy.PerformProxyRequest(
-                //         context, neverTimeOutHttpClient, baseUriTaskFactory(), applicationStoppingToken,
-                //         proxy404s: true);
-                // }
                 var path = context.Request.Path.Value;
                 var referer = context.Request.Headers["Referer"];
                 var route = context.Request.RouteValues;
+
+                var endpoint = context.GetEndpoint();
+
+                if (endpoint != null
+                    && route["action"].ToString() != "Index"
+                    )
+                {
+                    await next();
+                    return;
+                }
 
                 // route 是否是默认路由
                 // path 是否是默认区域
                 // referer 是否是默认区域
 
                 await SpaProxy.PerformProxyRequest(
-                    context,
-                    neverTimeOutHttpClient,
-                    baseUriTaskFactory(),
-                    applicationStoppingToken,
-                    proxy404s: true);
+                   context,
+                   neverTimeOutHttpClient,
+                   baseUriTaskFactory(),
+                   applicationStoppingToken,
+                   proxy404s: true);
             });
         }
 

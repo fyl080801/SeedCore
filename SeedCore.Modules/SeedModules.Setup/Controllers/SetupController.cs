@@ -1,3 +1,4 @@
+using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 
@@ -14,7 +15,7 @@ namespace SeedModules.Setup.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return this.Spa("index.html");
         }
 
         [HttpGet]

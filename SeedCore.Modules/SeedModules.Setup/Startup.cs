@@ -1,6 +1,5 @@
 using System;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -15,7 +14,6 @@ namespace SeedModules.Setup
         public override void ConfigureServices(IServiceCollection services)
         {
             services.AddSetup();
-            // services.AddSeedSpa();
         }
 
         public override void Configure(IApplicationBuilder app, IEndpointRouteBuilder routes, IServiceProvider serviceProvider)
@@ -29,19 +27,14 @@ namespace SeedModules.Setup
                 defaults: new { controller = "Setup", action = "Index" }
             );
 
-            app.MapWhen(context =>
+            if (env.IsDevelopment())
             {
-                return context.GetEndpoint() == null && context.Request.Path.Value.StartsWith("/SeedModules.Setup");
-            }, builder =>
-            {
-                builder.UseSpa(spa =>
+                app.UseSpaDevelopment(builder =>
                 {
-                    if (env.IsDevelopment())
-                    {
-                        spa.UseProxyToSpaDevelopmentServer("http://localhost:9000");
-                    }
+                    builder.Server.SuccessRegx = "Compiled successfully.";
+                    builder.UseSpaDevelopmentServer("start");
                 });
-            });
+            }
         }
     }
 }

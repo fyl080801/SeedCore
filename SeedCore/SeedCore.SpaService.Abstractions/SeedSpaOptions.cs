@@ -9,18 +9,17 @@ namespace SeedCore.SpaService
 
         public SeedSpaOptions(SeedSpaOptions defaultOptions)
         {
-            this.StartupTimeout = defaultOptions?.StartupTimeout ?? TimeSpan.FromSeconds(5);
-            this.DefaultPage = defaultOptions?.DefaultPage ?? "/index.html";
             this.DevServerPort = defaultOptions?.DevServerPort ?? default(int);
             this.PkgManagerCommand = defaultOptions?.PkgManagerCommand ?? "npm";
+            this.SuccessRegx = defaultOptions?.SuccessRegx ?? "App running at:";
         }
 
-        public string DefaultPage { get; set; }
-
-        public TimeSpan StartupTimeout { get; set; }
+        // public string DefaultPage { get; set; }
 
         public string PkgManagerCommand { get; set; }
 
         public int DevServerPort { get; set; }
+
+        public string SuccessRegx { get; set; }
     }
 }

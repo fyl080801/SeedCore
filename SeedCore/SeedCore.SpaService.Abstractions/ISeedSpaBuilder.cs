@@ -1,10 +1,12 @@
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.SpaServices;
 
 namespace SeedCore.SpaService
 {
-    public interface ISeedSpaBuilder
+    public interface ISeedSpaBuilder : ISpaBuilder
     {
-        IApplicationBuilder ApplicationBuilder { get; }
-        SeedSpaOptions Options { get; }
+        SeedSpaOptions Server { get; }
+        Assembly Assembly { get; }
     }
 }

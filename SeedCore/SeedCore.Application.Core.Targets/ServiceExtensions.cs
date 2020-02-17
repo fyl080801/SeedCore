@@ -14,6 +14,7 @@ namespace Microsoft.Extensions.DependencyInjection
             var builder = services.AddOrchardCore()
                 .AddCommands()
                 .AddMvc()
+                .AddSpa()
                 .AddSetupFeatures("SeedModules.Setup")
                 .AddDataContext()
                 .AddShellDataStorage()

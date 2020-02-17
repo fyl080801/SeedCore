@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="OrchardCore.Abstractions" />
+    <PackageReference Include="OrchardCore.Application.Mvc.Targets" />
   </ItemGroup>
 
   <ItemGroup>

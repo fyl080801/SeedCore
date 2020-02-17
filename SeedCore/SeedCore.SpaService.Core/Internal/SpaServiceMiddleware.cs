@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,11 +21,12 @@ namespace SeedCore.SpaService.Internal
 
         public static void Attach(
             ISeedSpaBuilder spaBuilder,
-            string sourcePath,
             string scriptName)
         {
-            var pkgManagerCommand = spaBuilder.Options.PkgManagerCommand;
-            var devServerPort = spaBuilder.Options.DevServerPort;
+            var attribute = spaBuilder.Assembly.GetCustomAttribute<SpaProjectAttribute>();
+            var sourcePath = Path.Combine(attribute.Project, attribute.Path);
+            var pkgManagerCommand = spaBuilder.Server.PkgManagerCommand;
+            var devServerPort = spaBuilder.Server.DevServerPort;
 
             if (string.IsNullOrEmpty(scriptName))
             {
@@ -40,6 +42,8 @@ namespace SeedCore.SpaService.Internal
                 scriptName,
                 pkgManagerCommand,
                 devServerPort,
+                spaBuilder.Server.SuccessRegx,
+                spaBuilder.Assembly.GetName().Name,
                 logger,
                 diagnosticSource,
                 applicationStoppingToken);
@@ -62,6 +66,8 @@ namespace SeedCore.SpaService.Internal
             string scriptName,
             string pkgManagerCommand,
             int portNumber,
+            string successRegx,
+            string moduleName,
             ILogger logger,
             DiagnosticSource diagnosticSource,
             CancellationToken applicationStoppingToken)
@@ -75,7 +81,7 @@ namespace SeedCore.SpaService.Internal
             var envVars = new Dictionary<string, string>
             {
                 { "PORT", portNumber.ToString() },
-                { "BROWSER", "none" },
+                { "SEED_MODULE", moduleName }
             };
 
             var scriptRunner = new NodeScriptRunner(
@@ -87,7 +93,7 @@ namespace SeedCore.SpaService.Internal
                 try
                 {
                     await scriptRunner.StdOut.WaitForMatch(
-                        new Regex("App running at:", RegexOptions.None, RegexMatchTimeout));
+                        new Regex(successRegx, RegexOptions.None, RegexMatchTimeout));
                 }
                 catch (EndOfStreamException ex)
                 {

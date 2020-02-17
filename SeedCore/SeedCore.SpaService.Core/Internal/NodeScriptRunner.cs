@@ -16,7 +16,14 @@ namespace SeedCore.SpaService.Internal
 
         private static Regex AnsiColorRegex = new Regex("\x001b\\[[0-9;]*m", RegexOptions.None, TimeSpan.FromSeconds(1));
 
-        public NodeScriptRunner(string workingDirectory, string scriptName, string arguments, IDictionary<string, string> envVars, string pkgManagerCommand, DiagnosticSource diagnosticSource, CancellationToken applicationStoppingToken)
+        public NodeScriptRunner(
+            string workingDirectory,
+            string scriptName,
+            string arguments,
+            IDictionary<string, string> envVars,
+            string pkgManagerCommand,
+            DiagnosticSource diagnosticSource,
+            CancellationToken applicationStoppingToken)
         {
             if (string.IsNullOrEmpty(workingDirectory))
             {

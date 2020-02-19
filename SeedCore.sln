@@ -1,35 +1,52 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedCore.Web", "SeedCore.Web\SeedCore.Web.csproj", "{4D011A35-BE36-4924-94D9-44905931BA59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeedCore.Web", "SeedCore.Web\SeedCore.Web.csproj", "{4D011A35-BE36-4924-94D9-44905931BA59}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SeedCore", "SeedCore", "{9D1AD1D5-8488-463E-876A-A969CC4316E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedCore.Application.Core.Targets", "SeedCore\SeedCore.Application.Core.Targets\SeedCore.Application.Core.Targets.csproj", "{56F0E7E7-D380-4464-A01B-897E03DF0C41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeedCore.Application.Core.Targets", "SeedCore\SeedCore.Application.Core.Targets\SeedCore.Application.Core.Targets.csproj", "{56F0E7E7-D380-4464-A01B-897E03DF0C41}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SeedCore.Modules", "SeedCore.Modules", "{F2CBECA9-C1D3-4380-BD67-D8B8B724FD05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedModules.Setup", "SeedCore.Modules\SeedModules.Setup\SeedModules.Setup.csproj", "{EDD0D05D-ECC8-47BF-8015-F7B6BB00EAA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeedModules.Setup", "SeedCore.Modules\SeedModules.Setup\SeedModules.Setup.csproj", "{EDD0D05D-ECC8-47BF-8015-F7B6BB00EAA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedCore.Setup.Core", "SeedCore\SeedCore.Setup.Core\SeedCore.Setup.Core.csproj", "{3F57D52F-7338-4AD5-8156-452FAB352A16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeedCore.Setup.Core", "SeedCore\SeedCore.Setup.Core\SeedCore.Setup.Core.csproj", "{3F57D52F-7338-4AD5-8156-452FAB352A16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedModules.Recipes", "SeedCore.Modules\SeedModules.Recipes\SeedModules.Recipes.csproj", "{D7219F53-C177-4A4B-8156-DF65B7A317C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeedModules.Recipes", "SeedCore.Modules\SeedModules.Recipes\SeedModules.Recipes.csproj", "{D7219F53-C177-4A4B-8156-DF65B7A317C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedModules.Admin", "SeedCore.Modules\SeedModules.Admin\SeedModules.Admin.csproj", "{E606702E-1C19-4E36-A5DA-0813160F43AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeedModules.Admin", "SeedCore.Modules\SeedModules.Admin\SeedModules.Admin.csproj", "{E606702E-1C19-4E36-A5DA-0813160F43AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedModules.Features", "SeedCore.Modules\SeedModules.Features\SeedModules.Features.csproj", "{4A848AEA-AE68-4804-BB74-19C19A0316F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeedModules.Features", "SeedCore.Modules\SeedModules.Features\SeedModules.Features.csproj", "{4A848AEA-AE68-4804-BB74-19C19A0316F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedCore.Infrastructure", "SeedCore\SeedCore.Infrastructure\SeedCore.Infrastructure.csproj", "{A8AAA788-F838-414F-81B5-4219FB08506F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeedCore.Infrastructure", "SeedCore\SeedCore.Infrastructure\SeedCore.Infrastructure.csproj", "{A8AAA788-F838-414F-81B5-4219FB08506F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedCore.Data.Abstractions", "SeedCore\SeedCore.Data.Abstractions\SeedCore.Data.Abstractions.csproj", "{BFBBC7F5-6F16-4AB1-98CB-1F9C9ECC3064}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeedCore.Data.Abstractions", "SeedCore\SeedCore.Data.Abstractions\SeedCore.Data.Abstractions.csproj", "{BFBBC7F5-6F16-4AB1-98CB-1F9C9ECC3064}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedCore.Data", "SeedCore\SeedCore.Data\SeedCore.Data.csproj", "{8182C486-2C0E-41B9-85B2-39F881481D86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeedCore.Data", "SeedCore\SeedCore.Data\SeedCore.Data.csproj", "{8182C486-2C0E-41B9-85B2-39F881481D86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedCore.SpaService.Core", "SeedCore\SeedCore.SpaService.Core\SeedCore.SpaService.Core.csproj", "{9928ED45-3C9D-4357-A0FE-CD34B13031D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeedCore.SpaService.Core", "SeedCore\SeedCore.SpaService.Core\SeedCore.SpaService.Core.csproj", "{9928ED45-3C9D-4357-A0FE-CD34B13031D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedCore.SpaService.Abstractions", "SeedCore\SeedCore.SpaService.Abstractions\SeedCore.SpaService.Abstractions.csproj", "{D083B60A-0134-47B1-B41D-17C7119D3D2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeedCore.SpaService.Abstractions", "SeedCore\SeedCore.SpaService.Abstractions\SeedCore.SpaService.Abstractions.csproj", "{D083B60A-0134-47B1-B41D-17C7119D3D2D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SeedCore.Build", "SeedCore.Build", "{E759EF75-4D9D-4C55-9625-07CD573B2F8E}"
+	ProjectSection(SolutionItems) = preProject
+		SeedCore.Build\Dependencies.AspNetCore.props = SeedCore.Build\Dependencies.AspNetCore.props
+		SeedCore.Build\Dependencies.props = SeedCore.Build\Dependencies.props
+		SeedCore.Build\SeedCore.Application.Targets.targets = SeedCore.Build\SeedCore.Application.Targets.targets
+		SeedCore.Build\SeedCore.Commons.props = SeedCore.Build\SeedCore.Commons.props
+		SeedCore.Build\SeedCore.Commons.targets = SeedCore.Build\SeedCore.Commons.targets
+		SeedCore.Build\SeedCore.Spa.targets = SeedCore.Build\SeedCore.Spa.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1E5B533D-F9B0-4AD0-976D-F6E39B92D065}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +56,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4D011A35-BE36-4924-94D9-44905931BA59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -189,6 +203,9 @@ Global
 		{D083B60A-0134-47B1-B41D-17C7119D3D2D}.Release|x86.ActiveCfg = Release|Any CPU
 		{D083B60A-0134-47B1-B41D-17C7119D3D2D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{56F0E7E7-D380-4464-A01B-897E03DF0C41} = {9D1AD1D5-8488-463E-876A-A969CC4316E1}
 		{EDD0D05D-ECC8-47BF-8015-F7B6BB00EAA6} = {F2CBECA9-C1D3-4380-BD67-D8B8B724FD05}
@@ -201,5 +218,8 @@ Global
 		{8182C486-2C0E-41B9-85B2-39F881481D86} = {9D1AD1D5-8488-463E-876A-A969CC4316E1}
 		{9928ED45-3C9D-4357-A0FE-CD34B13031D2} = {9D1AD1D5-8488-463E-876A-A969CC4316E1}
 		{D083B60A-0134-47B1-B41D-17C7119D3D2D} = {9D1AD1D5-8488-463E-876A-A969CC4316E1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FF8676FE-200E-4EE8-B228-4806BC4D026B}
 	EndGlobalSection
 EndGlobal

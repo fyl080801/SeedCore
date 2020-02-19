@@ -11,7 +11,7 @@ export default () => {
 
   return (
     <div>
-      <h1>哈哈哈!!!</h1>
+      <h1>哈哈哈!</h1>
       <input value={text} onChange={evt => setText(evt.target.value)}></input>
       <p>{text}</p>
       <button onClick={doFetch}>fetch</button>

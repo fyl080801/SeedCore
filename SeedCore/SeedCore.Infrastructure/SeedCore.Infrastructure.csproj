@@ -5,12 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OrchardCore" />
     <PackageReference Include="OrchardCore.Infrastructure.Abstractions" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SeedCore.Data\SeedCore.Data.csproj" />
+    <ProjectReference Include="..\SeedCore\SeedCore.csproj" />
   </ItemGroup>
 
 </Project>

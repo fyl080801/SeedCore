@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <IncludeBuildOutput>false</IncludeBuildOutput>
+    <RootNamespace>SeedCore.SpaService</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

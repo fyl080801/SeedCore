@@ -25,7 +25,7 @@ namespace SeedCore.Web
             }
 
             app.UseRouting();
-            app.UseOrchardCore();
+            app.UseSeedCore();
         }
     }
 }

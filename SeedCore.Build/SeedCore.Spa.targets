@@ -22,10 +22,11 @@
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
   </Target>
 
-  <Target Name="PublishRunWebpack" BeforeTargets="BeforeBuild" Condition=" '$(Configuration)' == 'Release' And Exists('$(SpaRoot)') ">
+  <Target Name="PublishRunWebpack" BeforeTargets="BeforeBuild" Condition=" Exists('$(SpaRoot)') ">
     <PropertyGroup>
       <BuildExec>
         <![CDATA[
+export SEED_MODULE=$(AssemblyName)
 set SEED_MODULE=$(AssemblyName)
 npm run build
 ]]>
@@ -37,14 +38,14 @@ npm run build
     <Exec WorkingDirectory="$(SpaRoot)" Command="$(BuildExec)" />
 
     <!-- Include the newly-built files in the publish output -->
-    <!--<ItemGroup>
+    <!-- <ItemGroup>
       <DistFiles Include="$(SpaRoot)dist\**" />
       <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
         <RelativePath>%(DistFiles.Identity)</RelativePath>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       </ResolvedFileToPublish>
-    </ItemGroup>-->
+    </ItemGroup> -->
   </Target>
 
   <Target Name="ResolveSpa" AfterTargets="AfterResolveReferences" Condition=" '$(Configuration)' == 'Debug' And Exists('$(SpaRoot)') ">

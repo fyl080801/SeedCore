@@ -6,12 +6,16 @@ using SeedCore.Data.Migrations;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static class SeedBuilderExtensions
+    public static class OrchardCoreBuilderExtensions
     {
         public static OrchardCoreBuilder AddDataContext(this OrchardCoreBuilder builder)
         {
             builder.ConfigureServices(services =>
             {
+                services.AddScoped<IDataMigrationManager, DataMigrationManager>();
+                services.AddScoped<IModularTenantEvents, AutoDataMigration>();
+                services.AddScoped<IDataMigrator, DataMigrator>();
+
                 services.TryAddDataProvider(name: "Microsoft SQLServer", provider: "SqlConnection");
                 services.TryAddDataProvider(name: "MySql Database", provider: "MySql");
 

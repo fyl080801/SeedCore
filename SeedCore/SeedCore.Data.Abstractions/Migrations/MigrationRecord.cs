@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SeedCore.Data
+namespace SeedCore.Data.Migrations
 {
     public class MigrationRecord
     {

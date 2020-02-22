@@ -9,6 +9,8 @@ namespace SeedCore.SpaService
 {
     class SpaStaticFileProvider : ISpaStaticFileProvider
     {
+        public const string SPA_BASE = "ClientApp/dist";
+
         private readonly IApplicationContext _applicationContext;
 
         public SpaStaticFileProvider(IApplicationContext applicationContext)
@@ -42,7 +44,7 @@ namespace SeedCore.SpaService
 
                 if (application.Modules.Any(m => m.Name == module))
                 {
-                    var fileSubPath = NormalizePath(Path.Combine("ClientApp/dist", path.Substring(index + 1)));
+                    var fileSubPath = NormalizePath(Path.Combine(SPA_BASE, path.Substring(index + 1)));
 
                     if (module != application.Name)
                     {

@@ -25,7 +25,7 @@
       "sourceFileMap": {
         "/Views": "${workspaceFolder}/Views"
       },
-      "console": "integratedTerminal"
+      "console": "externalTerminal"
     },
     {
       "name": ".NET Core Attach",

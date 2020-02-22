@@ -8,13 +8,12 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design.Internal;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Migrations.Design;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore;
 
 namespace SeedCore.Data.Migrations
 {
@@ -79,10 +78,15 @@ namespace SeedCore.Data.Migrations
 
         private async Task<string> CreateSnapshotCode(IDbContext context)
         {
-            string snapshotCode = new DesignTimeServicesBuilder(context.GetType().Assembly, context.GetType().Assembly, new ModuleDbOperationReporter(), new string[0])
-                .Build((DbContext)context)
+            var contextType = context.GetType();
+            var designInstance = DbContextActivator.CreateInstance(contextType, contextType.Assembly, null);
+            string snapshotCode = designInstance.GetInfrastructure()
                 .GetService<IMigrationsCodeGenerator>()
                 .GenerateSnapshot(ContextAssembly, context.GetType(), SnapshotName, context.Context.Model);
+            // string snapshotCode = new DesignTimeServicesBuilder(context.GetType().Assembly, context.GetType().Assembly, new ModuleDbOperationReporter(), new string[0])
+            //     .Build((DbContext)context)
+            //     .GetService<IMigrationsCodeGenerator>()
+            //     .GenerateSnapshot(ContextAssembly, context.GetType(), SnapshotName, context.Context.Model);
             return await Task.FromResult(Convert.ToBase64String(Encoding.UTF8.GetBytes(snapshotCode)));
         }
 

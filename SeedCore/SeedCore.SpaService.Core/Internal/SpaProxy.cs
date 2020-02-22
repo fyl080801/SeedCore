@@ -97,7 +97,7 @@ namespace SeedCore.SpaService.Internal
             }
         }
 
-        private static HttpRequestMessage CreateProxyHttpRequest(HttpContext context, Uri uri)
+        public static HttpRequestMessage CreateProxyHttpRequest(HttpContext context, Uri uri)
         {
             var request = context.Request;
 

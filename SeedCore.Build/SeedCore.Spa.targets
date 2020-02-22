@@ -1,4 +1,4 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" InitialTargets="PublishRunWebpack">
 
   <PropertyGroup>
     <SpaRoot>ClientApp\</SpaRoot>
@@ -22,20 +22,21 @@
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
   </Target>
 
-  <Target Name="PublishRunWebpack" BeforeTargets="BeforeBuild" Condition=" Exists('$(SpaRoot)') ">
+  <Target Name="PublishRunWebpack" Condition=" '$(Configuration)' == 'Release' And Exists('$(SpaRoot)') ">
     <PropertyGroup>
       <BuildExec>
         <![CDATA[
 export SEED_MODULE=$(AssemblyName)
 set SEED_MODULE=$(AssemblyName)
+npm install
 npm run build
 ]]>
       </BuildExec>
     </PropertyGroup>
 
+    <Message Text="Build Spa: $(MSBuildProjectName)" Importance="high" />
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
-    <Exec WorkingDirectory="$(SpaRoot)" Command="$(BuildExec)" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="$(BuildExec)" ContinueOnError="WarnAndContinue" />
 
     <!-- Include the newly-built files in the publish output -->
     <!-- <ItemGroup>

@@ -24,7 +24,7 @@ namespace Microsoft.AspNetCore.Mvc
                 }
                 else
                 {
-                    var request = (HttpWebRequest)WebRequest.Create(await baseUriTaskFactory());
+                    var request = (HttpWebRequest)WebRequest.Create(await baseUriTaskFactory() + assemblyName);
                     request.Method = controller.Request.Method;
                     request.ContentType = controller.Request.ContentType;
 

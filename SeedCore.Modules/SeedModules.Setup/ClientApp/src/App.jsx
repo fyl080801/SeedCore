@@ -76,8 +76,6 @@ export default Form.create()(props => {
     validateFields
   } = props.form;
 
-  console.log(props.form);
-
   return (
     <div className="container">
       <div className="jumbotron mt-5">

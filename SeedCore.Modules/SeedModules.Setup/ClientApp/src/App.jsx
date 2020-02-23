@@ -221,7 +221,7 @@ export default () => {
           </Col>
         </Row>
       </Form>
-      <div style={{ textAlign: 'center' }} className="mt-5 bottom">
+      <div style={{ textAlign: 'center' }} className="bottom mt-5">
         <Button type="primary" size="large" onClick={install}>
           开始安装
         </Button>

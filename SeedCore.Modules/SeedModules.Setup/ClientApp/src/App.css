@@ -5,14 +5,15 @@
   border-radius: 0.3rem;
 }
 
-[dir] .mt-5,
-[dir] .my-5 {
-  margin-top: 3rem !important;
+.mt-5,
+.my-5 {
+  margin-top: 3rem;
 }
 
-[dir] .mt-5.bottom,
-[dir] .my-5.bottom {
-  margin-bottom: 3rem !important;
+.bottom.mt-5,
+.bottom.my-5 {
+  margin-top: 0rem !important;
+  margin-bottom: 3rem;
 }
 
 hr {

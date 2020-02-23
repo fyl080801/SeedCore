@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using OrchardCore.Environment.Shell;
+using SeedCore.Data.Migrations;
 
 namespace SeedCore.Data
 {
@@ -28,7 +29,7 @@ namespace SeedCore.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // modelBuilder.ApplyConfiguration(new MigrationTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new MigrationRecordTypeConfiguration());
 
             foreach (var configuration in _entityConfigurations)
             {

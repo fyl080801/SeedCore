@@ -1,13 +1,10 @@
 using System;
-using System.IO;
-using System.Reflection;
+using System.Collections;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Hosting;
-using OrchardCore.Environment.Shell.Builders;
 using SeedCore.SpaService;
 using SeedCore.SpaService.Internal;
 
@@ -15,6 +12,8 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class SeedSpaBuilderExtensions
     {
+        public static Hashtable UrlHash = new Hashtable();
+
         public static void UseSpaDevelopmentServer(this ISeedSpaBuilder spaBuilder, string npmScript)
         {
             if (spaBuilder == null)
@@ -49,6 +48,12 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             var applicationBuilder = spaBuilder.ApplicationBuilder;
             var applicationStoppingToken = GetStoppingToken(applicationBuilder);
+            var assemblyName = spaBuilder.Assembly.GetName().Name;
+
+            if (!SeedSpaBuilderExtensions.UrlHash.ContainsKey(assemblyName))
+            {
+                SeedSpaBuilderExtensions.UrlHash.Add(assemblyName, baseUriTaskFactory);
+            }
 
             applicationBuilder.UseWebSockets();
 
@@ -58,7 +63,7 @@ namespace Microsoft.Extensions.DependencyInjection
             applicationBuilder.Use(async (context, next) =>
             {
                 if (context.GetEndpoint() == null
-                    && context.Request.Path.Value.StartsWith($"/{spaBuilder.Assembly.GetName().Name}"))
+                    && context.Request.Path.Value.StartsWith($"/{assemblyName}"))
                 {
                     await SpaProxy.PerformProxyRequest(
                         context,

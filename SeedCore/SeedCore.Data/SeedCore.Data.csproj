@@ -14,9 +14,9 @@
     <PackageReference Include="Microsoft.CSharp" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
-    <PackageReference Include="OrchardCore.Abstractions" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql.Design" />
+    <PackageReference Include="OrchardCore.Abstractions" />
     <PackageReference Include="System.CodeDom" />
     <PackageReference Include="System.Runtime" />
   </ItemGroup>

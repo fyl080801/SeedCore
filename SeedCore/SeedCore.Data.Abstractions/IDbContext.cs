@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
+using SeedCore.Data.Migrations;
 
 namespace SeedCore.Data
 {

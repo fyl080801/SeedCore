@@ -31,7 +31,7 @@ namespace SeedModules.Setup
             {
                 app.UseSpaDevelopment(builder =>
                 {
-                    builder.Server.SuccessRegx = "Compiled successfully.";
+                    builder.Server.SuccessRegx = "Compiled successfully!";
                     builder.UseSpaDevelopmentServer("start");
                 });
             }

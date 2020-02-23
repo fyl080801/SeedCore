@@ -1,13 +1,9 @@
 using System;
-using System.IO;
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SpaServices;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using SeedCore.SpaService;
-using SeedCore.SpaService.Internal;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

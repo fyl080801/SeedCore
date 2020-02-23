@@ -33,8 +33,6 @@ namespace SeedModules.Setup.Models
         [DataType(DataType.Password)]
         public string PasswordConfirmation { get; set; }
 
-        public IEnumerable<DatabaseProvider> DatabaseProviders { get; set; } = Enumerable.Empty<DatabaseProvider>();
-
         public IEnumerable<RecipeDescriptor> Recipes { get; set; }
 
         public bool RecipeNamePreset { get; set; }

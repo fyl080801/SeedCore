@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OrchardCore.Environment.Shell;
@@ -12,16 +13,13 @@ namespace SeedModules.Setup.Controllers
     {
         private readonly ISetupService _setupService;
         private readonly ShellSettings _shellSettings;
-        private readonly IEnumerable<DatabaseProvider> _databaseProviders;
 
         public SetupController(
             ISetupService setupService,
-            ShellSettings shellSettings,
-            IEnumerable<DatabaseProvider> databaseProviders)
+            ShellSettings shellSettings)
         {
             _setupService = setupService;
             _shellSettings = shellSettings;
-            _databaseProviders = databaseProviders;
         }
 
         [AppendAntiforgery]
@@ -30,28 +28,19 @@ namespace SeedModules.Setup.Controllers
             return this.Spa("index.html");
         }
 
-        [HttpGet]
-        public IActionResult DatabaseProviders()
-        {
-            return Json(_databaseProviders);
-        }
-
         [HttpPost]
         public async Task<IActionResult> Execute([FromBody]SetupModel model)
         {
-            model.DatabaseProviders = _databaseProviders;
+            var recipes = await _setupService.GetSetupRecipesAsync();
 
             var setupContext = new SetupContext()
             {
-                AdminEmail = "",
-                AdminPassword = "",
-                AdminUsername = "",
-                DatabaseConnectionString = "",
-                DatabaseProvider = "",
-                DatabaseTablePrefix = "",
-                SiteName = "",
-                SiteTimeZone = "",
-                Recipe = null,
+                AdminEmail = model.Email,
+                AdminPassword = model.Password,
+                AdminUsername = model.UserName,
+                SiteName = model.SiteName,
+                SiteTimeZone = model.SiteTimeZone,
+                Recipe = recipes.FirstOrDefault(e => e.Name == model.RecipeName),
                 EnabledFeatures = null,
                 ShellSettings = _shellSettings,
                 Errors = new Dictionary<string, string>()

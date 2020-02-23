@@ -17,7 +17,10 @@ namespace Microsoft.Extensions.DependencyInjection
                 services.AddScoped<IDataMigrator, DataMigrator>();
 
                 services.TryAddDataProvider(name: "Microsoft SQLServer", provider: "SqlConnection");
-                services.TryAddDataProvider(name: "MySql Database", provider: "MySql");
+                services.TryAddDataProvider(
+                    name: "MySql Database",
+                    provider: "MySql",
+                    sample: "Server=localhost;Port=3306;Database=dbname;User=root;Password=;");
 
                 services.AddSingleton<IStore>(sp =>
                 {

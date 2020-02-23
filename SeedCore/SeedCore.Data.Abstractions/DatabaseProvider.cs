@@ -5,5 +5,7 @@
         public string Name { get; set; }
 
         public string Provider { get; set; }
+
+        public string Sample { get; set; }
     }
 }

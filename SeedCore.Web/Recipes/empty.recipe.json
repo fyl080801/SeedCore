@@ -1,0 +1,24 @@
+{
+  "name": "Blank",
+  "displayName": "空网站",
+  "description": "",
+  "author": "",
+  "website": "https://orchardproject.net",
+  "version": "1.0",
+  "issetuprecipe": true,
+  "categories": ["default"],
+  "tags": ["blank"],
+
+  // The variables are evaluated the first time they are accessed, and reused across steps
+  "variables": {
+    // "now": "[js: new Date().toISOString()]"
+  },
+
+  "steps": [
+    {
+      "name": "feature",
+      "disable": [],
+      "enable": []
+    }
+  ]
+}

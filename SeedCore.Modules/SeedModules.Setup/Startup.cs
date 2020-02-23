@@ -10,7 +10,6 @@ namespace SeedModules.Setup
 {
     public class Startup : StartupBase
     {
-
         public override void ConfigureServices(IServiceCollection services)
         {
             services.AddSetup();
@@ -31,7 +30,7 @@ namespace SeedModules.Setup
             {
                 app.UseSpaDevelopment(builder =>
                 {
-                    builder.Server.SuccessRegx = "Compiled successfully!";
+                    builder.Server.SuccessRegx = "Project is running at";
                     builder.UseSpaDevelopmentServer("start");
                 });
             }

@@ -2,14 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OrchardCore.Module.Targets" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SeedCore\SeedCore.Module.Targets\SeedCore.Module.Targets.csproj" />
+    <ProjectReference Include="..\SeedCore.Abstractions\SeedCore.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

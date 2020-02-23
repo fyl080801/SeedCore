@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="OrchardCore.Application.Mvc.Targets" />
     <PackageReference Include="OrchardCore.Scripting" />
+    <PackageReference Include="OrchardCore.HomeRoute" />
   </ItemGroup>
 
   <ItemGroup>
@@ -14,6 +15,9 @@
     <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.Recipes\SeedModules.Recipes.csproj" />
     <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.Features\SeedModules.Features.csproj" />
     <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.Admin\SeedModules.Admin.csproj" />
+    <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.Account\SeedModules.Account.csproj" />
+    <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.Settings\SeedModules.Settings.csproj" />
+    <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.Tenants\SeedModules.Tenants.csproj" />
   </ItemGroup>
 
 </Project>

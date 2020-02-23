@@ -1,7 +1,24 @@
 import cookie from 'react-cookies';
 
 export const getDatabaseProviders = async () => {
-  const response = await fetch('/SeedModules.Setup/Setup/DatabaseProviders', {
+  const response = await fetch(
+    '/SeedModules.Setup/Settings/DatabaseProviders',
+    {
+      method: 'GET'
+    }
+  );
+  return await response.json();
+};
+
+export const getTimeZones = async () => {
+  const response = await fetch('/SeedModules.Setup/Settings/TimeZones', {
+    method: 'GET'
+  });
+  return await response.json();
+};
+
+export const getRecipes = async () => {
+  const response = await fetch('/SeedModules.Setup/Settings/Recipes', {
     method: 'GET'
   });
   return await response.json();

@@ -5,7 +5,11 @@ namespace SeedCore.Data.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection TryAddDataProvider(this IServiceCollection services, string name, string provider)
+        public static IServiceCollection TryAddDataProvider(
+            this IServiceCollection services,
+            string name,
+            string provider,
+            string sample = null)
         {
             for (var i = services.Count - 1; i >= 0; i--)
             {
@@ -20,7 +24,12 @@ namespace SeedCore.Data.Extensions
                 }
             }
 
-            services.AddSingleton(new DatabaseProvider { Name = name, Provider = provider });
+            services.AddSingleton(new DatabaseProvider
+            {
+                Name = name,
+                Provider = provider,
+                Sample = sample
+            });
 
             return services;
         }

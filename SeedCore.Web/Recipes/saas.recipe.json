@@ -1,0 +1,34 @@
+{
+  "name": "SaaS",
+  "displayName": "软件即服务(saas)",
+  "description": "默认的 Saas 功能, 管理多个租户",
+  "author": "",
+  "website": "",
+  "version": "1.0",
+  "issetuprecipe": true,
+  "categories": ["default"],
+  "tags": ["developer", "default"],
+  "steps": [
+    {
+      "name": "feature",
+      "disable": [],
+      "enable": [
+        "SeedModules.Admin",
+        "SeedModules.Account",
+        "SeedModules.Tenants",
+        "SeedModules.Recipes",
+        "SeedModules.Features",
+        "SeedModules.Settings",
+        "OrchardCore.HomeRoute"
+      ]
+    },
+    {
+      "name": "settings",
+      "HomeRoute": {
+        "Action": "Index",
+        "Controller": "Home",
+        "Area": "TheTheme"
+      }
+    }
+  ]
+}

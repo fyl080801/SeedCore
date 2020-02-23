@@ -23,47 +23,36 @@ import 'bootstrap/dist/css/bootstrap-grid.css';
 import 'antd/dist/antd.css';
 import './App.css';
 
-export default () => {
-  // data
-  const [siteName, setSiteName] = useState('');
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [databaseProvider, setDatabaseProvider] = useState(undefined);
-  const [connectionString, setConnectionString] = useState('');
-  const [siteTimeZone, setSiteTimeZone] = useState(undefined);
-  const [recipeName, setRecipeName] = useState(undefined);
-
-  // source
+export default Form.create()(props => {
   const [providers, setProviders] = useState([]);
   const [timeZones, setTimeZones] = useState([]);
   const [recipes, setRecipes] = useState([]);
 
   const install = async () => {
-    var modal = Modal.warning({
-      icon: null,
-      content: (
-        <Spin spinning={true} tip="提交中...">
-          <div style={{ width: '100%' }}></div>
-        </Spin>
-      ),
-      okButtonProps: { hidden: true }
-    });
-    try {
-      const result = await postExecute({
-        siteName,
-        userName,
-        email,
-        databaseProvider,
-        connectionString,
-        siteTimeZone,
-        recipeName
+    validateFields(async (errors, values) => {
+      const hasError = Object.keys(errors).find(item => item.length > 0);
+      if (hasError) {
+        return;
+      }
+
+      var modal = Modal.warning({
+        icon: null,
+        content: (
+          <Spin spinning={true} tip="提交中...">
+            <div style={{ width: '100%' }}></div>
+          </Spin>
+        ),
+        okButtonProps: { hidden: true }
       });
-      console.log(result);
-      window.location.href = window.location.href;
-      window.location.reload();
-    } catch {
-      modal.destroy();
-    }
+
+      try {
+        await postExecute(getFieldsValue());
+        window.location.href = window.location.href;
+        window.location.reload();
+      } catch {
+        modal.destroy();
+      }
+    });
   };
 
   useEffect(() => {
@@ -79,6 +68,15 @@ export default () => {
       setRecipes(result);
     });
   }, []);
+
+  const {
+    getFieldDecorator,
+    getFieldsValue,
+    getFieldValue,
+    validateFields
+  } = props.form;
+
+  console.log(props.form);
 
   return (
     <div className="container">
@@ -97,51 +95,50 @@ export default () => {
           </Col>
           <Col span={8}>
             <Form.Item label="名称:">
-              <Input
-                placeholder="输入名称"
-                value={siteName}
-                onChange={value => setSiteName(value.target.value)}
-              />
+              {getFieldDecorator('siteName', {
+                rules: [{ required: true, message: '必填' }]
+              })(<Input placeholder="输入名称" />)}
             </Form.Item>
           </Col>
           <Col span={8}>
             <Form.Item label="产品:">
               <Input.Group compact>
-                <Select
-                  placeholder="请选择"
-                  style={{ width: '60%' }}
-                  value={recipeName}
-                  onChange={value => setRecipeName(value)}
-                >
-                  {recipes.map((item, index) => (
-                    <Select.Option key={index} value={item.name}>
-                      {item.displayName}
-                    </Select.Option>
-                  ))}
-                </Select>
+                {getFieldDecorator('recipeName', {
+                  rules: [{ required: true, message: '必填' }]
+                })(
+                  <Select placeholder="请选择" style={{ width: '60%' }}>
+                    {recipes.map((item, index) => (
+                      <Select.Option key={index} value={item.name}>
+                        {item.displayName}
+                      </Select.Option>
+                    ))}
+                  </Select>
+                )}
                 <Button icon="folder-open">打开</Button>
               </Input.Group>
             </Form.Item>
           </Col>
           <Col span={8}>
             <Form.Item label="时区:">
-              <Select
-                placeholder="请选择"
-                showSearch
-                filterOption={(input, option) =>
-                  option.props.children
-                    .toLowerCase()
-                    .indexOf(input.toLowerCase()) >= 0
-                }
-                value={siteTimeZone}
-                onChange={value => setSiteTimeZone(value)}
-              >
-                {timeZones.map((item, index) => (
-                  <Select.Option key={index} value={item.timeZoneId}>
-                    {item.timeZoneName}
-                  </Select.Option>
-                ))}
-              </Select>
+              {getFieldDecorator('siteTimeZone', {
+                rules: [{ required: true, message: '必选' }]
+              })(
+                <Select
+                  placeholder="请选择"
+                  showSearch
+                  filterOption={(input, option) =>
+                    option.props.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
+                >
+                  {timeZones.map((item, index) => (
+                    <Select.Option key={index} value={item.timeZoneId}>
+                      {item.timeZoneName}
+                    </Select.Option>
+                  ))}
+                </Select>
+              )}
             </Form.Item>
           </Col>
           <Col span={24}>
@@ -152,17 +149,17 @@ export default () => {
           </Col>
           <Col span={12}>
             <Form.Item label="类型:">
-              <Select
-                placeholder="请选择"
-                value={databaseProvider}
-                onChange={value => setDatabaseProvider(value)}
-              >
-                {providers.map((item, index) => (
-                  <Select.Option key={index} value={item.provider}>
-                    {item.name}
-                  </Select.Option>
-                ))}
-              </Select>
+              {getFieldDecorator('databaseProvider', {
+                rules: [{ required: true, message: '必选' }]
+              })(
+                <Select placeholder="请选择">
+                  {providers.map((item, index) => (
+                    <Select.Option key={index} value={item.provider}>
+                      {item.name}
+                    </Select.Option>
+                  ))}
+                </Select>
+              )}
             </Form.Item>
           </Col>
           <Col span={12}>
@@ -174,15 +171,14 @@ export default () => {
             <Form.Item
               label="连接字符串:"
               extra={
-                providers.find(item => item.provider === databaseProvider)
-                  ?.sample
+                providers.find(
+                  item => item.provider === getFieldValue('databaseProvider')
+                )?.sample
               }
             >
-              <Input
-                placeholder="请输入"
-                value={connectionString}
-                onChange={evt => setConnectionString(evt.target.value)}
-              />
+              {getFieldDecorator('connectionString', {
+                rules: [{ required: true, message: '必填' }]
+              })(<Input placeholder="请输入" />)}
             </Form.Item>
           </Col>
           <Col span={24}>
@@ -193,30 +189,56 @@ export default () => {
           </Col>
           <Col span={12}>
             <Form.Item label="用户名:">
-              <Input
-                placeholder="请输入"
-                value={userName}
-                onChange={evt => setUserName(evt.target.value)}
-              />
+              {getFieldDecorator('userName', {
+                rules: [{ required: true, message: '必填' }]
+              })(<Input placeholder="请输入" />)}
             </Form.Item>
           </Col>
           <Col span={12}>
             <Form.Item label="邮箱:">
-              <Input
-                placeholder="请输入"
-                value={email}
-                onChange={evt => setEmail(evt.target.value)}
-              />
+              {getFieldDecorator('email', {
+                rules: [
+                  { required: true, message: '必填' },
+                  { type: 'email', message: '格式不正确' }
+                ]
+              })(<Input placeholder="请输入" />)}
             </Form.Item>
           </Col>
           <Col span={12}>
             <Form.Item label="密码:">
-              <Input.Password placeholder="请输入" visibilityToggle={false} />
+              {getFieldDecorator('password', {
+                rules: [{ required: true, message: '必填' }]
+              })(
+                <Input.Password placeholder="请输入" visibilityToggle={false} />
+              )}
             </Form.Item>
           </Col>
           <Col span={12}>
             <Form.Item label="确认密码:">
-              <Input.Password placeholder="请输入" visibilityToggle={false} />
+              {getFieldDecorator('passwordConfirmation', {
+                rules: [
+                  { required: true, message: '必填' },
+                  {
+                    validator: (rule, value, callback) => {
+                      if (!value || value.trim() === '') {
+                        callback();
+                        return;
+                      }
+
+                      const pwd = getFieldValue('password');
+
+                      if (pwd !== value) {
+                        callback('密码不一致');
+                        return;
+                      }
+
+                      callback();
+                    }
+                  }
+                ]
+              })(
+                <Input.Password placeholder="请输入" visibilityToggle={false} />
+              )}
             </Form.Item>
           </Col>
         </Row>
@@ -228,4 +250,4 @@ export default () => {
       </div>
     </div>
   );
-};
+});

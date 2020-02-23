@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\SeedCore\SeedCore.Setup.Core\SeedCore.Setup.Core.csproj" />
     <ProjectReference Include="..\..\SeedCore\SeedCore.SpaService.Core\SeedCore.SpaService.Core.csproj" />
+    <ProjectReference Include="..\..\SeedCore\SeedCore.Module.Targets\SeedCore.Module.Targets.csproj" />
   </ItemGroup>
 
 </Project>

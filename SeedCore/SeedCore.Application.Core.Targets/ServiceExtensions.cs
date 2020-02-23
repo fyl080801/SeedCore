@@ -4,16 +4,18 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class ServiceExtensions
     {
-        public static IServiceCollection AddSeedCore(this IServiceCollection services)
+        public static IServiceCollection AddSeedCoreWeb(this IServiceCollection services)
         {
-            return AddSeedCore(services, null);
+            return AddSeedCoreWeb(services, null);
         }
 
-        public static IServiceCollection AddSeedCore(this IServiceCollection services, Action<OrchardCoreBuilder> configure)
+        public static IServiceCollection AddSeedCoreWeb(this IServiceCollection services, Action<OrchardCoreBuilder> configure)
         {
-            var builder = services.AddOrchardCore()
+            var builder = services.AddSeedCore()
+
                 .AddCommands()
                 .AddMvc()
+
                 .AddSpa()
                 .AddSetupFeatures("SeedModules.Setup")
                 .AddDataContext()

@@ -9,7 +9,7 @@ namespace SeedCore.Web
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSeedCore();
+            services.AddSeedCoreWeb();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

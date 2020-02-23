@@ -7,7 +7,7 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseSeedCore(this IApplicationBuilder app, Action<IApplicationBuilder> configure = null)
         {
             app.UseOrchardCore(configure);
-            app.UsePoweredBy(false, "SeedCore");
+            app.UsePoweredBy(true, "SeedCore");
 
             return app;
         }

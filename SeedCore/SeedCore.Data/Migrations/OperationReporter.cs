@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore.Design.Internal;
 
 namespace SeedCore.Data.Migrations
 {
-    public class ModuleDbOperationReporter : IOperationReporter
+    public class OperationReporter : IOperationReporter
     {
         public void WriteError(string message)
         {

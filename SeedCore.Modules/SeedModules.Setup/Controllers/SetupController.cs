@@ -59,11 +59,11 @@ namespace SeedModules.Setup.Controllers
                 setupContext.DatabaseTablePrefix = model.TablePrefix;
             }
 
-            // var result = await _setupService.SetupAsync(setupContext);
+            var result = await _setupService.SetupAsync(setupContext);
 
-            // return Json(new { result });
+            return Json(new { result });
 
-            return await Task.FromResult(Json(new { text = "success" }));
+            // return await Task.FromResult(Json(new { text = "success" }));
         }
     }
 }

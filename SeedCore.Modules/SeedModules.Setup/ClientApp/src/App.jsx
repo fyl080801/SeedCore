@@ -5,8 +5,6 @@ import {
   Form,
   Input,
   Select,
-  Row,
-  Col,
   Modal,
   Spin,
   Icon
@@ -28,10 +26,9 @@ export default Form.create()(props => {
   const [timeZones, setTimeZones] = useState([]);
   const [recipes, setRecipes] = useState([]);
 
-  const install = async () => {
-    validateFields(async (errors, values) => {
-      const hasError = Object.keys(errors).find(item => item.length > 0);
-      if (hasError) {
+  const install = () => {
+    validateFields(async errors => {
+      if (errors) {
         return;
       }
 
@@ -79,26 +76,26 @@ export default Form.create()(props => {
   return (
     <div className="container">
       <div className="jumbotron mt-5">
-        <img src={logo} style={{ float: 'left' }} width="126px"></img>
+        <img alt="" src={logo} style={{ float: 'left' }} width="126px"></img>
         <Typography.Title level={1}>设置</Typography.Title>
         <Typography.Text>请填写系统设置相关信息</Typography.Text>
       </div>
-      <Form labelCol={120}>
-        <Row gutter={24}>
-          <Col span={24}>
+      <Form>
+        <div className="row">
+          <div className="col-md-12">
             <Typography.Title level={3}>
               <Icon type="setting" /> 基本信息
             </Typography.Title>
             <hr />
-          </Col>
-          <Col span={8}>
+          </div>
+          <div className="col-md-4">
             <Form.Item label="名称:">
               {getFieldDecorator('siteName', {
                 rules: [{ required: true, message: '必填' }]
               })(<Input placeholder="输入名称" />)}
             </Form.Item>
-          </Col>
-          <Col span={8}>
+          </div>
+          <div className="col-md-4">
             <Form.Item label="产品:">
               <Input.Group compact>
                 {getFieldDecorator('recipeName', {
@@ -115,8 +112,8 @@ export default Form.create()(props => {
                 <Button icon="folder-open">打开</Button>
               </Input.Group>
             </Form.Item>
-          </Col>
-          <Col span={8}>
+          </div>
+          <div className="col-md-4">
             <Form.Item label="时区:">
               {getFieldDecorator('siteTimeZone', {
                 rules: [{ required: true, message: '必选' }]
@@ -138,14 +135,14 @@ export default Form.create()(props => {
                 </Select>
               )}
             </Form.Item>
-          </Col>
-          <Col span={24}>
+          </div>
+          <div className="col-md-12">
             <Typography.Title level={3}>
               <Icon type="setting" /> 数据库
             </Typography.Title>
             <hr />
-          </Col>
-          <Col span={12}>
+          </div>
+          <div className="col-md-6">
             <Form.Item label="类型:">
               {getFieldDecorator('databaseProvider', {
                 rules: [{ required: true, message: '必选' }]
@@ -159,13 +156,16 @@ export default Form.create()(props => {
                 </Select>
               )}
             </Form.Item>
-          </Col>
-          <Col span={12}>
+          </div>
+          <div className="col-md-6">
             <Form.Item label="表前缀:">
-              <Input placeholder="请输入" />
+              {getFieldDecorator(
+                'tablePrefix',
+                {}
+              )(<Input placeholder="请输入" />)}
             </Form.Item>
-          </Col>
-          <Col span={24}>
+          </div>
+          <div className="col-md-12">
             <Form.Item
               label="连接字符串:"
               extra={
@@ -178,21 +178,21 @@ export default Form.create()(props => {
                 rules: [{ required: true, message: '必填' }]
               })(<Input placeholder="请输入" />)}
             </Form.Item>
-          </Col>
-          <Col span={24}>
+          </div>
+          <div className="col-md-12">
             <Typography.Title level={3}>
               <Icon type="setting" /> 管理员信息
             </Typography.Title>
             <hr />
-          </Col>
-          <Col span={12}>
+          </div>
+          <div className="col-md-6">
             <Form.Item label="用户名:">
               {getFieldDecorator('userName', {
                 rules: [{ required: true, message: '必填' }]
               })(<Input placeholder="请输入" />)}
             </Form.Item>
-          </Col>
-          <Col span={12}>
+          </div>
+          <div className="col-md-6">
             <Form.Item label="邮箱:">
               {getFieldDecorator('email', {
                 rules: [
@@ -201,8 +201,8 @@ export default Form.create()(props => {
                 ]
               })(<Input placeholder="请输入" />)}
             </Form.Item>
-          </Col>
-          <Col span={12}>
+          </div>
+          <div className="col-md-6">
             <Form.Item label="密码:">
               {getFieldDecorator('password', {
                 rules: [{ required: true, message: '必填' }]
@@ -210,8 +210,8 @@ export default Form.create()(props => {
                 <Input.Password placeholder="请输入" visibilityToggle={false} />
               )}
             </Form.Item>
-          </Col>
-          <Col span={12}>
+          </div>
+          <div className="col-md-6">
             <Form.Item label="确认密码:">
               {getFieldDecorator('passwordConfirmation', {
                 rules: [
@@ -238,8 +238,8 @@ export default Form.create()(props => {
                 <Input.Password placeholder="请输入" visibilityToggle={false} />
               )}
             </Form.Item>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </Form>
       <div style={{ textAlign: 'center' }} className="bottom mt-5">
         <Button type="primary" size="large" onClick={install}>

@@ -7,7 +7,7 @@ namespace SeedCore.Data.Migrations
     {
         public void Configure(EntityTypeBuilder<MigrationRecord> builder)
         {
-            builder.ToTable("_MigrationRecord")
+            builder.ToTable("$MigrationRecord")
                 .HasKey(e => e.Id);
         }
     }

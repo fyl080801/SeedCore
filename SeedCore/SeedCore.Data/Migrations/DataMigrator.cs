@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore.Design.Internal;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -26,6 +27,9 @@ namespace SeedCore.Data.Migrations
         {
             IModel lastModel = null;
             var contextServiceProvider = context.Context.GetInfrastructure();
+
+            var store = context.Context.GetService<IStore>();
+            await new InitlizationDbContext(store.CreateOptions(false)).Database.EnsureCreatedAsync();
 
             try
             {
@@ -78,16 +82,27 @@ namespace SeedCore.Data.Migrations
 
         private async Task<string> CreateSnapshotCode(IDbContext context)
         {
-            var contextType = context.GetType();
-            var designInstance = DbContextActivator.CreateInstance(contextType, contextType.Assembly, null);
-            string snapshotCode = designInstance.GetInfrastructure()
-                .GetService<IMigrationsCodeGenerator>()
-                .GenerateSnapshot(ContextAssembly, context.GetType(), SnapshotName, context.Context.Model);
-            // string snapshotCode = new DesignTimeServicesBuilder(context.GetType().Assembly, context.GetType().Assembly, new ModuleDbOperationReporter(), new string[0])
-            //     .Build((DbContext)context)
-            //     .GetService<IMigrationsCodeGenerator>()
-            //     .GenerateSnapshot(ContextAssembly, context.GetType(), SnapshotName, context.Context.Model);
-            return await Task.FromResult(Convert.ToBase64String(Encoding.UTF8.GetBytes(snapshotCode)));
+            try
+            {
+                // var contextType = context.Context.GetType();
+                // var designInstance = DbContextActivator.CreateInstance(contextType, contextType.Assembly, new OperationReportHandler());
+                // string snapshotCode = designInstance.GetInfrastructure()
+                //     .GetService<IMigrationsCodeGenerator>()
+                //     .GenerateSnapshot(ContextAssembly, context.GetType(), SnapshotName, context.Context.Model);
+                string snapshotCode = new DesignTimeServicesBuilder(
+                    context.Context.GetType().Assembly,
+                    context.Context.GetType().Assembly,
+                    new OperationReporter(),
+                    new string[0])
+                        .Build(context.Context)
+                        .GetService<IMigrationsCodeGenerator>()
+                        .GenerateSnapshot(ContextAssembly, context.Context.GetType(), SnapshotName, context.Context.Model);
+                return await Task.FromResult(Convert.ToBase64String(Encoding.UTF8.GetBytes(snapshotCode)));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         private async Task<ModelSnapshot> CreateModelSnapshot(IDbContext context, string codedefine)

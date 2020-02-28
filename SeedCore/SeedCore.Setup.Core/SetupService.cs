@@ -11,7 +11,6 @@ using OrchardCore.Environment.Shell.Builders;
 using OrchardCore.Environment.Shell.Descriptor;
 using OrchardCore.Environment.Shell.Descriptor.Models;
 using OrchardCore.Environment.Shell.Models;
-using OrchardCore.Environment.Shell.Scope;
 using OrchardCore.Modules;
 using OrchardCore.Recipes.Models;
 using OrchardCore.Recipes.Services;
@@ -94,18 +93,16 @@ namespace SeedCore.Setup.Services
                 _logger.LogInformation("Running setup for tenant '{TenantName}'.", context.ShellSettings.Name);
             }
 
-            // Features to enable for Setup
             string[] hardcoded =
             {
                 _applicationName,
                 "SeedModules.Features",
+                "SeedModules.Scripting",
                 "SeedModules.Recipes",
-                "OrchardCore.Scripting",
             };
 
             context.EnabledFeatures = hardcoded.Union(context.EnabledFeatures ?? Enumerable.Empty<string>()).Distinct().ToList();
 
-            // Set shell state to "Initializing" so that subsequent HTTP requests are responded to with "Service Unavailable" while Orchard is setting up.
             context.ShellSettings.State = TenantState.Initializing;
 
             var shellSettings = new ShellSettings(context.ShellSettings);
@@ -122,11 +119,6 @@ namespace SeedCore.Setup.Services
                 throw new ArgumentException($"{nameof(context.DatabaseProvider)} is required");
             }
 
-            // Creating a standalone environment based on a "minimum shell descriptor".
-            // In theory this environment can be used to resolve any normal components by interface, and those
-            // components will exist entirely in isolation - no crossover between the safemode container currently in effect
-            // It is used to initialize the database before the recipe is run.
-
             var shellDescriptor = new ShellDescriptor
             {
                 Features = context.EnabledFeatures.Select(id => new ShellFeature { Id = id }).ToList()
@@ -141,23 +133,17 @@ namespace SeedCore.Setup.Services
                     try
                     {
                         store = scope.ServiceProvider.GetRequiredService<IStore>();
-                        await store.InitializeAsync();
+                        // await store.InitializeAsync(scope.ServiceProvider);
                     }
                     catch (Exception e)
                     {
-                        // Tables already exist or database was not found
-
-                        // The issue is that the user creation needs the tables to be present,
-                        // if the user information is not valid, the next POST will try to recreate the
-                        // tables. The tables should be rolled back if one of the steps is invalid,
-                        // unless the recipe is executing?
+                        // 表已存在或数据库问题
 
                         _logger.LogError(e, "An error occurred while initializing the datastore.");
                         context.Errors.Add("DatabaseProvider", T["An error occurred while initializing the datastore: {0}", e.Message]);
                         return;
                     }
 
-                    // Create the "minimum shell descriptor"
                     await scope
                         .ServiceProvider
                         .GetService<IShellDescriptorManager>()
@@ -188,7 +174,6 @@ namespace SeedCore.Setup.Services
                 _applicationLifetime.ApplicationStopping);
             }
 
-            // Reloading the shell context as the recipe  has probably updated its features
             using (var shellContext = await _shellHost.CreateShellContextAsync(shellSettings))
             {
                 await shellContext.CreateScope().UsingAsync(async scope =>
@@ -198,7 +183,6 @@ namespace SeedCore.Setup.Services
                         context.Errors[key] = message;
                     }
 
-                    // Invoke modules to react to the setup event
                     var setupEventHandlers = scope.ServiceProvider.GetServices<ISetupEventHandler>();
                     var logger = scope.ServiceProvider.GetRequiredService<ILogger<SetupService>>();
 
@@ -221,7 +205,6 @@ namespace SeedCore.Setup.Services
                 }
             }
 
-            // Update the shell state
             shellSettings.State = TenantState.Running;
             await _shellHost.UpdateShellSettingsAsync(shellSettings);
 

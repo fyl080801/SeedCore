@@ -1,15 +1,10 @@
 using OrchardCore.Modules.Manifest;
 
 [assembly: Module(
-    Name = "Recipes",
+    Name = "Scripting",
     Author = "",
     Website = "",
     Version = "1.0.0",
-    Description = "",
-    Dependencies = new[]
-    {
-        "SeedModules.Features",
-        "SeedModules.Scripting"
-    },
+    Description = "Adds scripting capabilities.",
     Category = "Infrastructure"
 )]

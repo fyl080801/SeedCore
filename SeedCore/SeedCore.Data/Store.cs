@@ -1,13 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using OrchardCore.Environment.Shell;
+using OrchardCore.Modules;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Pomelo.EntityFrameworkCore.MySql.Storage;
-using SeedCore.Data.Migrations;
 
 namespace SeedCore.Data
 {
@@ -16,7 +16,8 @@ namespace SeedCore.Data
         readonly ShellSettings _settings;
         readonly IServiceProvider _serviceProvider;
 
-        DbContextOptionsBuilder _cachedOptionsBuilder;
+        DbContextOptionsBuilder _cachedOptionsBuilder = null;
+        IEnumerable<object> _cachedTypeConfigs = null;
 
         public Store(IServiceProvider serviceProvider)
         {
@@ -24,9 +25,38 @@ namespace SeedCore.Data
             _settings = serviceProvider.GetService<ShellSettings>();
         }
 
-        public IDbContext CreateDbContext(params object[] typeConfigs)
+        public IDbContext CreateDbContext()
         {
-            return new ModuleDbContext(CreateOptions(true), _settings, typeConfigs);
+            return CreateDbContext(_serviceProvider);
+        }
+
+        public IDbContext CreateDbContext(IServiceProvider serviceProvider)
+        {
+            if (serviceProvider == null)
+            {
+                serviceProvider = _serviceProvider;
+            }
+
+            if (_cachedTypeConfigs == null)
+            {
+                var typeConfigs = serviceProvider.GetServices<IEntityTypeConfigurationProvider>()
+                    .InvokeAsync(provider => provider.GetEntityTypeConfigurationsAsync(), null)
+                    .Result;
+
+                if (typeConfigs.Count() > 0)
+                {
+                    _cachedTypeConfigs = typeConfigs;
+                }
+            }
+
+            var configs = _cachedTypeConfigs != null ? _cachedTypeConfigs : Enumerable.Empty<object>();
+
+            return new ModuleDbContext(CreateOptions(configs.Count() > 0), _settings, configs);
+        }
+
+        public IDbContext CreateDbContext(IEnumerable<object> typeConfigs)
+        {
+            return new ModuleDbContext(CreateOptions(typeConfigs.Count() > 0), _settings, typeConfigs);
         }
 
         public DbContextOptions CreateOptions(bool cached = false)
@@ -48,14 +78,12 @@ namespace SeedCore.Data
                 case "SqlConnection":
                     optionBuilder.UseSqlServer(_settings["ConnectionString"], ob =>
                     {
-                        // ob.MigrationsHistoryTable($"{_settings["TablePrefix"]}_Migrations_");
                         // ob.UseRowNumberForPaging(true);
                     });
                     break;
                 case "MySql":
                     optionBuilder.UseMySql(_settings["ConnectionString"], ob =>
                     {
-                        // ob.MigrationsHistoryTable($"{_settings["TablePrefix"]}_Migrations_");
                         ob.CharSetBehavior(CharSetBehavior.AppendToAllColumns);
                         ob.CharSet(CharSet.Utf8Mb4);
                     });
@@ -66,18 +94,21 @@ namespace SeedCore.Data
 
             optionBuilder.UseApplicationServiceProvider(_serviceProvider);
 
-            if (_cachedOptionsBuilder == null)
+            if (cached)
+            {
+                optionBuilder.EnableServiceProviderCaching(true);
+            }
+            else
+            {
+                optionBuilder.EnableServiceProviderCaching(false);
+            }
+
+            if (cached && _cachedOptionsBuilder == null)
             {
                 _cachedOptionsBuilder = optionBuilder;
             }
 
             return optionBuilder.Options;
-        }
-
-        public async Task InitializeAsync()
-        {
-            await CreateDbContext().Context.Database.MigrateAsync();
-            await _serviceProvider.GetService<IDataMigrationManager>().UpdateAllFeaturesAsync();
         }
     }
 }

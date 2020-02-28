@@ -29,10 +29,10 @@ namespace Microsoft.Extensions.DependencyInjection
 
                 services.AddScoped<IDbContext>(sp =>
                 {
-                    var typeConfigs = sp.GetServices<IEntityTypeConfigurationProvider>()
-                        .InvokeAsync(provider => provider.GetEntityTypeConfigurationsAsync(), null)
-                        .Result;
-                    return sp.GetService<IStore>()?.CreateDbContext(typeConfigs.ToArray());
+                    // var typeConfigs = sp.GetServices<IEntityTypeConfigurationProvider>()
+                    //     .InvokeAsync(provider => provider.GetEntityTypeConfigurationsAsync(), null)
+                    //     .Result;
+                    return sp.GetService<IStore>()?.CreateDbContext(sp); // .CreateDbContext(typeConfigs.ToArray());
                 });
             });
 

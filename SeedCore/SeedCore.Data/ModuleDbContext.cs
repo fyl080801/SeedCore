@@ -20,7 +20,7 @@ namespace SeedCore.Data
         public ModuleDbContext(
             DbContextOptions options,
             ShellSettings settings,
-            params object[] entityConfigurations)
+            IEnumerable<object> entityConfigurations)
             : base(options)
         {
             _entityConfigurations = entityConfigurations;

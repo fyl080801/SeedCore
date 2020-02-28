@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,8 @@ namespace SeedModules.Admin.Domain
         public string Name { get; set; }
 
         public string Remark { get; set; }
+
+        public DateTime? CreateTime { get; set; }
     }
 
     public class TestTableConfiguration : IEntityTypeConfiguration<TestTable>

@@ -12,10 +12,22 @@ namespace SeedCore.Data
     public interface IStore
     {
         /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        IDbContext CreateDbContext();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        IDbContext CreateDbContext(IServiceProvider serviceProvider);
+
+        /// <summary>
         /// 创建一个数据访问上下文
         /// </summary>
         /// <returns></returns>
-        IDbContext CreateDbContext(params object[] typeConfigs);
+        IDbContext CreateDbContext(IEnumerable<object> typeConfigs);
 
         /// <summary>
         /// 创建一个数据库配置

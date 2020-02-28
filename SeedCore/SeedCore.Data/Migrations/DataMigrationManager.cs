@@ -86,7 +86,7 @@ namespace SeedCore.Data.Migrations
                 features = _engineDescriptor.Features.Select(e => e.Id).ToArray();
             }
 
-            return _store.CreateDbContext(GetFeatureTypeConfigurations(features));
+            return _store.CreateDbContext(await GetFeatureTypeConfigurations(features));
         }
 
         private async Task<IEnumerable<object>> GetFeatureTypeConfigurations(IEnumerable<string> features)

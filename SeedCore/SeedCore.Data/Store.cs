@@ -48,14 +48,12 @@ namespace SeedCore.Data
                 case "SqlConnection":
                     optionBuilder.UseSqlServer(_settings["ConnectionString"], ob =>
                     {
-                        // ob.MigrationsHistoryTable($"{_settings["TablePrefix"]}_Migrations_");
                         // ob.UseRowNumberForPaging(true);
                     });
                     break;
                 case "MySql":
                     optionBuilder.UseMySql(_settings["ConnectionString"], ob =>
                     {
-                        // ob.MigrationsHistoryTable($"{_settings["TablePrefix"]}_Migrations_");
                         ob.CharSetBehavior(CharSetBehavior.AppendToAllColumns);
                         ob.CharSet(CharSet.Utf8Mb4);
                     });
@@ -65,6 +63,7 @@ namespace SeedCore.Data
             }
 
             optionBuilder.UseApplicationServiceProvider(_serviceProvider);
+            // optionBuilder.EnableServiceProviderCaching(false);
 
             if (_cachedOptionsBuilder == null)
             {
@@ -72,12 +71,6 @@ namespace SeedCore.Data
             }
 
             return optionBuilder.Options;
-        }
-
-        public async Task InitializeAsync()
-        {
-            await CreateDbContext().Context.Database.MigrateAsync();
-            await _serviceProvider.GetService<IDataMigrationManager>().UpdateAllFeaturesAsync();
         }
     }
 }

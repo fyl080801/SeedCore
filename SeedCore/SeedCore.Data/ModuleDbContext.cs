@@ -6,7 +6,7 @@ using SeedCore.Data.Migrations;
 
 namespace SeedCore.Data
 {
-    public class ModuleDbContext : DbContext, IDocumentDbContext
+    public class ModuleDbContext : DbContext, IDbContext
     {
         readonly IEnumerable<object> _entityConfigurations;
         readonly ShellSettings _settings;
@@ -43,6 +43,8 @@ namespace SeedCore.Data
 
             base.OnModelCreating(modelBuilder);
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { }
 
         public override DbSet<TEntity> Set<TEntity>()
         {

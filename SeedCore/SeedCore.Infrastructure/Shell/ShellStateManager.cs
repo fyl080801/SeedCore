@@ -34,7 +34,8 @@ namespace SeedCore.Environment.Shell
             if (_shellState == null)
             {
                 _shellState = new ShellState();
-                UpdateShellState();
+                _context.Set<ShellState>().Add(_shellState);
+                _context.SaveChanges();
             }
 
             return _shellState;
@@ -103,6 +104,7 @@ namespace SeedCore.Environment.Shell
 
         private void UpdateShellState()
         {
+            _context.Set<ShellState>().Update(_shellState);
             _context.SaveChanges();
         }
     }

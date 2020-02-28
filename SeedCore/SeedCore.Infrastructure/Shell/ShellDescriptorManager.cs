@@ -14,9 +14,6 @@ using SeedCore.Data;
 
 namespace SeedCore.Environment.Shell.Data.Descriptors
 {
-    /// <summary>
-    /// Implements <see cref="IShellDescriptorManager"/> by providing the list of features store in the database. 
-    /// </summary>
     public class ShellDescriptorManager : IShellDescriptorManager
     {
         private readonly IServiceProvider _serviceProvider;
@@ -110,7 +107,18 @@ namespace SeedCore.Environment.Shell.Data.Descriptors
                 _logger.LogInformation("Shell descriptor updated for tenant '{TenantName}'.", _shellSettings.Name);
             }
 
-            _context.SaveChanges();
+            var dbset = _context.Set<ShellDescriptor>();
+            var exisit = await dbset.FindAsync(shellDescriptorRecord.Id);
+
+            if (exisit != null)
+            {
+                dbset.Update(shellDescriptorRecord);
+                _context.SaveChanges();
+            }
+            else
+            {
+                dbset.Add(shellDescriptorRecord);
+            }
 
             // Update cached reference
             _shellDescriptor = shellDescriptorRecord;

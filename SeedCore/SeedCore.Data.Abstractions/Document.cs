@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace SeedCore.Data
 {
-    [Table("_Document")]
+    [Table("$Document")]
     public class Document
     {
         [Key]

@@ -23,11 +23,11 @@ namespace SeedCore.Data
         /// <returns></returns>
         DbContextOptions CreateOptions(bool cached = false);
 
-        /// <summary>
-        /// 初始化数据访问
-        /// </summary>
-        /// <param name="service"></param>
-        /// <returns></returns>
-        Task InitializeAsync();
+        // /// <summary>
+        // /// 初始化数据访问
+        // /// </summary>
+        // /// <param name="service"></param>
+        // /// <returns></returns>
+        // Task InitializeAsync(IServiceProvider serviceProvider);
     }
 }

@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.Setup\SeedModules.Setup.csproj" />
-    <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.Scripting\SeedModules.Scripting.csproj" />
     <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.Recipes\SeedModules.Recipes.csproj" />
     <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.Features\SeedModules.Features.csproj" />
     <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.Admin\SeedModules.Admin.csproj" />

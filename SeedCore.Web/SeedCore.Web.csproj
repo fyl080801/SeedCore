@@ -20,6 +20,7 @@
   <ItemGroup>
     <PackageReference Include="OrchardCore.Logging.NLog" />
     <PackageReference Include="OrchardCore.HomeRoute" />
+    <PackageReference Include="OrchardCore.Scripting" />
   </ItemGroup>
 
   <ItemGroup>

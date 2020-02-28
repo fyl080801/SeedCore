@@ -9,7 +9,7 @@ using OrchardCore.Modules.Manifest;
     Dependencies = new[]
     {
         "SeedModules.Features",
-        "SeedModules.Scripting"
+        "OrchardCore.Scripting"
     },
     Category = "Infrastructure"
 )]

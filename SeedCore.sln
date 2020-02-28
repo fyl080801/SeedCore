@@ -60,8 +60,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedModules.Settings", "See
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedModules.Tenants", "SeedCore.Modules\SeedModules.Tenants\SeedModules.Tenants.csproj", "{CFDD31D0-97A7-4EB4-95FE-7E0899979D83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedModules.Scripting", "SeedCore.Modules\SeedModules.Scripting\SeedModules.Scripting.csproj", "{5B590924-14FD-4014-AEFC-42EB642E35BB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

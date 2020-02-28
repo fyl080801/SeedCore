@@ -97,7 +97,7 @@ namespace SeedCore.Setup.Services
             {
                 _applicationName,
                 "SeedModules.Features",
-                "SeedModules.Scripting",
+                "OrchardCore.Scripting",
                 "SeedModules.Recipes",
             };
 

@@ -15,9 +15,9 @@ namespace SeedModules.Admin.Controllers
 
         public IActionResult Index()
         {
-            var table = _dbcontext.Set<TestTable>();
-            table.Add(new TestTable() { Name = "aaa" });
-            _dbcontext.SaveChanges();
+            // var table = _dbcontext.Set<TestTable>();
+            // table.Add(new TestTable() { Name = "aaa" });
+            // _dbcontext.SaveChanges();
             return Content("admin");
         }
     }

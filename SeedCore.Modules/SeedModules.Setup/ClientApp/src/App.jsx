@@ -44,8 +44,8 @@ export default Form.create()(props => {
 
       try {
         await postExecute(getFieldsValue());
-        // window.location.href = window.location.href;
-        // window.location.reload();
+        window.location.href = window.location.href;
+        window.location.reload();
       } catch {
         modal.destroy();
       }

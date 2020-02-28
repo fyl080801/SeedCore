@@ -26,7 +26,7 @@ namespace SeedCore.Data
 
         public IDbContext CreateDbContext(params object[] typeConfigs)
         {
-            return new ModuleDbContext(CreateOptions(true), _settings, typeConfigs);
+            return new ModuleDbContext(CreateOptions(typeConfigs.Length > 0 ? true : false), _settings, typeConfigs);
         }
 
         public DbContextOptions CreateOptions(bool cached = false)
@@ -63,9 +63,17 @@ namespace SeedCore.Data
             }
 
             optionBuilder.UseApplicationServiceProvider(_serviceProvider);
-            // optionBuilder.EnableServiceProviderCaching(false);
 
-            if (_cachedOptionsBuilder == null)
+            if (cached)
+            {
+                optionBuilder.EnableServiceProviderCaching(true);
+            }
+            else
+            {
+                optionBuilder.EnableServiceProviderCaching(false);
+            }
+
+            if (cached && _cachedOptionsBuilder == null)
             {
                 _cachedOptionsBuilder = optionBuilder;
             }

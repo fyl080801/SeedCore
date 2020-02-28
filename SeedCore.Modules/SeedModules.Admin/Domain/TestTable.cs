@@ -13,6 +13,8 @@ namespace SeedModules.Admin.Domain
 
         [MaxLength(50)]
         public string Name { get; set; }
+
+        public string Remark { get; set; }
     }
 
     public class TestTableConfiguration : IEntityTypeConfiguration<TestTable>

@@ -27,9 +27,9 @@ namespace SeedCore.Data.Migrations
         {
             IModel lastModel = null;
             var contextServiceProvider = context.Context.GetInfrastructure();
-            // var store = context.Context.GetService<IStore>();
 
-            // await new InitlizationDbContext(store.CreateOptions(false)).Database.EnsureCreatedAsync();
+            var store = context.Context.GetService<IStore>();
+            await new InitlizationDbContext(store.CreateOptions(false)).Database.EnsureCreatedAsync();
 
             try
             {

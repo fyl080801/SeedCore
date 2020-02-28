@@ -1,11 +1,11 @@
-using Microsoft.AspNetCore.Antiforgery;
+﻿using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc
 {
-    public class AppendAntiforgeryAttribute : ResultFilterAttribute
+    public class AppendAntiforgeryTokenAttribute : ResultFilterAttribute
     {
         public override void OnResultExecuting(ResultExecutingContext context)
         {

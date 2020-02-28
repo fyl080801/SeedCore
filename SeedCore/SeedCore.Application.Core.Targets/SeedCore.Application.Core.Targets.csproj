@@ -9,11 +9,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.AdminLogin\SeedModules.AdminLogin.csproj" />
     <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.Setup\SeedModules.Setup.csproj" />
     <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.Recipes\SeedModules.Recipes.csproj" />
     <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.Features\SeedModules.Features.csproj" />
     <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.Admin\SeedModules.Admin.csproj" />
-    <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.Account\SeedModules.Account.csproj" />
     <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.Settings\SeedModules.Settings.csproj" />
     <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.Tenants\SeedModules.Tenants.csproj" />
   </ItemGroup>

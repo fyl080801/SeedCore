@@ -54,8 +54,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedCore.Module.Targets", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedCore.Abstractions", "SeedCore\SeedCore.Abstractions\SeedCore.Abstractions.csproj", "{54B32C44-FB34-43E5-949B-1257CE775574}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedModules.Account", "SeedCore.Modules\SeedModules.Account\SeedModules.Account.csproj", "{301C5584-B436-4853-9176-B53858CAF913}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedModules.Settings", "SeedCore.Modules\SeedModules.Settings\SeedModules.Settings.csproj", "{C9666EEC-ABE2-4C21-97F9-DB34C0C9EDAB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedModules.Tenants", "SeedCore.Modules\SeedModules.Tenants\SeedModules.Tenants.csproj", "{CFDD31D0-97A7-4EB4-95FE-7E0899979D83}"

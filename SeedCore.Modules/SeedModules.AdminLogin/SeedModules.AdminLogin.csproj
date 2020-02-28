@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OrchardCore.Recipes.Abstractions" />
+    <ProjectReference Include="..\..\SeedCore\SeedCore.SpaService.Core\SeedCore.SpaService.Core.csproj" />
   </ItemGroup>
 
 </Project>

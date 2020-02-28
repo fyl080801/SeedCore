@@ -5,14 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OrchardCore.Module.Targets" />
     <PackageReference Include="OrchardCore.Recipes.Abstractions" />
     <PackageReference Include="OrchardCore.Setup.Abstractions" />
     <PackageReference Include="OrchardCore.Infrastructure.Abstractions" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SeedCore\SeedCore.Module.Targets\SeedCore.Module.Targets.csproj" />
     <ProjectReference Include="..\..\SeedCore\SeedCore.Data.Abstractions\SeedCore.Data.Abstractions.csproj" />
   </ItemGroup>
 

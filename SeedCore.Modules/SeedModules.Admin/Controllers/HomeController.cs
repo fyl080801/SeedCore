@@ -1,6 +1,6 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SeedCore.Data;
-using SeedModules.Admin.Domain;
 
 namespace SeedModules.Admin.Controllers
 {
@@ -13,6 +13,7 @@ namespace SeedModules.Admin.Controllers
             _dbcontext = dbcontext;
         }
 
+        // [Authorize]
         public IActionResult Index()
         {
             // var table = _dbcontext.Set<TestTable>();

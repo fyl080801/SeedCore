@@ -13,18 +13,11 @@ namespace SeedModules.Admin.Controllers
             _dbcontext = dbcontext;
         }
 
+        [AppendAntiforgeryToken]
         [Authorize]
         public IActionResult Index()
         {
-            // var table = _dbcontext.Set<TestTable>();
-            // table.Add(new TestTable() { Name = "aaa" });
-            // _dbcontext.SaveChanges();
-            return Content("admin");
-        }
-
-        public IActionResult Login()
-        {
-            return Content("admin login");
+            return this.Spa("index.html");
         }
     }
 }

@@ -110,6 +110,23 @@ module.exports = function(webpackEnv) {
     return loaders;
   };
 
+  const htmlWebpackCommon = isEnvProduction
+    ? {
+        minify: {
+          removeComments: true,
+          collapseWhitespace: true,
+          removeRedundantAttributes: true,
+          useShortDoctype: true,
+          removeEmptyAttributes: true,
+          removeStyleLinkTypeAttributes: true,
+          keepClosingSlash: true,
+          minifyJS: true,
+          minifyCSS: true,
+          minifyURLs: true
+        }
+      }
+    : undefined;
+
   return {
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
     // Stop compilation early in production
@@ -126,6 +143,7 @@ module.exports = function(webpackEnv) {
         paths.appIndexJs
       ].filter(Boolean),
       login: [
+        // 增加一个新的entry
         isEnvDevelopment &&
           require.resolve('react-dev-utils/webpackHotDevClient'),
         paths.loginIndexJs
@@ -136,7 +154,7 @@ module.exports = function(webpackEnv) {
       pathinfo: isEnvDevelopment,
       filename: isEnvProduction
         ? 'static/js/[name].[contenthash:8].js'
-        : isEnvDevelopment && 'static/js/bundle.[name].js',
+        : isEnvDevelopment && 'static/js/bundle.[name].js', // 这里之前没有[name]，所以只有一个spa正常展示
       futureEmitAssets: true,
       chunkFilename: isEnvProduction
         ? 'static/js/[name].[contenthash:8].chunk.js'
@@ -390,22 +408,7 @@ module.exports = function(webpackEnv) {
             template: paths.appHtml,
             chunks: ['index']
           },
-          isEnvProduction
-            ? {
-                minify: {
-                  removeComments: true,
-                  collapseWhitespace: true,
-                  removeRedundantAttributes: true,
-                  useShortDoctype: true,
-                  removeEmptyAttributes: true,
-                  removeStyleLinkTypeAttributes: true,
-                  keepClosingSlash: true,
-                  minifyJS: true,
-                  minifyCSS: true,
-                  minifyURLs: true
-                }
-              }
-            : undefined
+          htmlWebpackCommon
         )
       ),
       new HtmlWebpackPlugin(
@@ -413,26 +416,11 @@ module.exports = function(webpackEnv) {
           {},
           {
             inject: true,
-            filename: 'login.html',
+            filename: 'login.html', // 增加一个新的webpackHtml
             template: paths.loginHtml,
             chunks: ['login']
           },
-          isEnvProduction
-            ? {
-                minify: {
-                  removeComments: true,
-                  collapseWhitespace: true,
-                  removeRedundantAttributes: true,
-                  useShortDoctype: true,
-                  removeEmptyAttributes: true,
-                  removeStyleLinkTypeAttributes: true,
-                  keepClosingSlash: true,
-                  minifyJS: true,
-                  minifyCSS: true,
-                  minifyURLs: true
-                }
-              }
-            : undefined
+          htmlWebpackCommon
         )
       ),
       isEnvProduction &&
@@ -458,6 +446,7 @@ module.exports = function(webpackEnv) {
             manifest[file.name] = file.path;
             return manifest;
           }, seed);
+          // 这里原来是main，因为entry变了所以这里要跟对entry项一致
           const entrypointFiles = entrypoints.index.filter(
             fileName => !fileName.endsWith('.map')
           );
@@ -468,6 +457,7 @@ module.exports = function(webpackEnv) {
           };
         }
       }),
+      // 增加一个新的ManifestPlugin
       new ManifestPlugin({
         fileName: 'asset-login-manifest.json',
         publicPath: paths.publicUrlOrPath,
@@ -498,6 +488,7 @@ module.exports = function(webpackEnv) {
             new RegExp('/[^/?]+\\.[^/]+$')
           ]
         }),
+      // asset 也增加一个----------------
       isEnvProduction &&
         new WorkboxWebpackPlugin.GenerateSW({
           clientsClaim: true,

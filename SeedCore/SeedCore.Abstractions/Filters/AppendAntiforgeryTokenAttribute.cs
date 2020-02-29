@@ -12,6 +12,7 @@ namespace Microsoft.AspNetCore.Mvc
             var antiforgery = context.HttpContext.RequestServices.GetService<IAntiforgery>();
             var tokens = antiforgery.GetAndStoreTokens(context.HttpContext);
             context.HttpContext.Response.Cookies.Append("XSRF-HEAD", tokens.HeaderName, new CookieOptions() { HttpOnly = false });
+            context.HttpContext.Response.Cookies.Append("XSRF-FIELD", tokens.FormFieldName, new CookieOptions() { HttpOnly = false });
             context.HttpContext.Response.Cookies.Append("XSRF-TOKEN", tokens.RequestToken, new CookieOptions() { HttpOnly = false });
         }
     }

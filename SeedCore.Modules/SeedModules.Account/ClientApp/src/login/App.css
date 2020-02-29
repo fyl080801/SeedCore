@@ -1,34 +1,6 @@
-.jumbotron {
-  padding: 2rem 1rem;
-  margin-bottom: 2rem;
-  background-color: #e9ecef;
-  border-radius: 0.3rem;
+.components-form-normal-login .login-form-forgot {
+  float: right;
 }
-
-.mt-5,
-.my-5 {
-  margin-top: 3rem;
-}
-
-.bottom.mt-5,
-.bottom.my-5 {
-  margin-top: 0rem !important;
-  margin-bottom: 3rem;
-}
-
-hr {
-  -webkit-box-sizing: content-box;
-  box-sizing: content-box;
-  height: 0;
-  overflow: visible;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  border: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-@media (min-width: 576px) {
-  .jumbotron {
-    padding: 4rem 2rem;
-  }
+.components-form-normal-login .login-form-button {
+  width: 100%;
 }

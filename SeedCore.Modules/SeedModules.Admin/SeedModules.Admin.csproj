@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\SeedCore\SeedCore.SpaService\SeedCore.SpaService.csproj" />
     <ProjectReference Include="..\..\SeedCore\SeedCore.Data.Abstractions\SeedCore.Data.Abstractions.csproj" />
   </ItemGroup>
 

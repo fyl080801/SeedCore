@@ -10,13 +10,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="OrchardCore.Module.Targets" />
+    <PackageReference Include="OrchardCore.Abstractions" />
+    <PackageReference Include="OrchardCore.Recipes.Abstractions" />
+    <PackageReference Include="OrchardCore.Setup.Abstractions" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SeedCore\SeedCore.Setup.Core\SeedCore.Setup.Core.csproj" />
-    <ProjectReference Include="..\..\SeedCore\SeedCore.SpaService.Core\SeedCore.SpaService.Core.csproj" />
-    <ProjectReference Include="..\..\SeedCore\SeedCore.Module.Targets\SeedCore.Module.Targets.csproj" />
+    <ProjectReference Include="..\..\SeedCore\SeedCore.SpaService\SeedCore.SpaService.csproj" />
+    <ProjectReference Include="..\..\SeedCore\SeedCore.Data.Abstractions\SeedCore.Data.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

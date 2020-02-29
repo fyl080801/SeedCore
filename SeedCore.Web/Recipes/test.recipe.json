@@ -12,7 +12,11 @@
     {
       "name": "feature",
       "disable": [],
-      "enable": ["SeedModules.Admin", "OrchardCore.HomeRoute"]
+      "enable": [
+        "SeedModules.Admin",
+        "SeedModules.Settings",
+        "OrchardCore.HomeRoute"
+      ]
     },
     {
       "name": "settings",
@@ -20,6 +24,14 @@
         "Action": "Index",
         "Controller": "Home",
         "Area": "SeedModules.Admin"
+      }
+    },
+    {
+      "name": "settings",
+      "LoginRoute": {
+        "Action": "Login",
+        "Controller": "Account",
+        "Area": "SeedModules.Account"
       }
     }
   ]

@@ -34,6 +34,10 @@ export default Form.create()(props => {
 
       var modal = Modal.warning({
         icon: null,
+        centered: true,
+        closable: false,
+        keyboard: false,
+        maskClosable: false,
         content: (
           <Spin spinning={true} tip="提交中...">
             <div style={{ width: '100%' }}></div>
@@ -44,7 +48,7 @@ export default Form.create()(props => {
 
       try {
         await postExecute(getFieldsValue());
-        window.location.href = window.location.href;
+        // window.location.href = window.location.href;
         window.location.reload();
       } catch {
         modal.destroy();

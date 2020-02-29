@@ -1,6 +1,6 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SeedCore.Data;
-using SeedModules.Admin.Domain;
 
 namespace SeedModules.Admin.Controllers
 {
@@ -13,12 +13,11 @@ namespace SeedModules.Admin.Controllers
             _dbcontext = dbcontext;
         }
 
+        [AppendAntiforgeryToken]
+        [Authorize]
         public IActionResult Index()
         {
-            var table = _dbcontext.Set<TestTable>();
-            table.Add(new TestTable() { Name = "aaa" });
-            _dbcontext.SaveChanges();
-            return Content("admin");
+            return this.Spa("index.html");
         }
     }
 }

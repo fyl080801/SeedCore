@@ -7,13 +7,11 @@
   <ItemGroup>
     <PackageReference Include="OrchardCore.Infrastructure" />
     <PackageReference Include="OrchardCore.Recipes.Core" />
-    <PackageReference Include="OrchardCore.Module.Targets" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SeedCore\SeedCore.Infrastructure\SeedCore.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\SeedCore\SeedCore\SeedCore.csproj" />
     <ProjectReference Include="..\SeedModules.Features\SeedModules.Features.csproj" />
-    <ProjectReference Include="..\..\SeedCore\SeedCore.Module.Targets\SeedCore.Module.Targets.csproj" />
   </ItemGroup>
 
 </Project>

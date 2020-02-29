@@ -22,7 +22,7 @@ namespace SeedModules.Setup.Controllers
             _shellSettings = shellSettings;
         }
 
-        [AppendAntiforgery]
+        [AppendAntiforgeryToken]
         public IActionResult Index(string token)
         {
             return this.Spa("index.html");
@@ -62,8 +62,6 @@ namespace SeedModules.Setup.Controllers
             var result = await _setupService.SetupAsync(setupContext);
 
             return Json(new { result });
-
-            // return await Task.FromResult(Json(new { text = "success" }));
         }
     }
 }

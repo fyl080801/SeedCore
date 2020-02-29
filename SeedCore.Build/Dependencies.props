@@ -17,6 +17,7 @@
     <PackageManagement Include="OrchardCore.Logging.NLog" Version="1.0.0-rc1-10004" />
     <PackageManagement Include="OrchardCore.HomeRoute" Version="1.0.0-rc1-10004" />
     <PackageManagement Include="OrchardCore.Scripting.JavaScript" Version="1.0.0-rc1-10004"/>
+    <PackageManagement Include="OrchardCore.Users.Abstractions" Version="1.0.0-rc1-10004" />
     <!-- Packages -->
     <PackageManagement Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageManagement Include="NLog.Web.AspNetCore" Version="4.8.5" />

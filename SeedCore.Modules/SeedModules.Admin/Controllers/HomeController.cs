@@ -13,7 +13,7 @@ namespace SeedModules.Admin.Controllers
             _dbcontext = dbcontext;
         }
 
-        // [Authorize]
+        [Authorize]
         public IActionResult Index()
         {
             // var table = _dbcontext.Set<TestTable>();

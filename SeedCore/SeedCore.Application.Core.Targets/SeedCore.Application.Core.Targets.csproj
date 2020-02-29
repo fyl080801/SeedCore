@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.Account\SeedModules.Account.csproj" />
     <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.AdminLogin\SeedModules.AdminLogin.csproj" />
     <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.Setup\SeedModules.Setup.csproj" />
     <ProjectReference Include="..\..\SeedCore.Modules\SeedModules.Recipes\SeedModules.Recipes.csproj" />

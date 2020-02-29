@@ -79,6 +79,10 @@ namespace SeedModules.Settings.Recipes
                         site.HomeRoute = property.Value.ToObject<RouteValueDictionary>();
                         break;
 
+                    case "LoginRoute":
+                        site.Properties["LoginRoute"] = property.Value;
+                        break;
+
                     default:
                         site.Properties[property.Name] = property.Value;
                         break;

@@ -27,7 +27,7 @@ namespace SeedCore.Data
         IQueryable<TEntity>,
         // IEnumerable<TEntity>,
         // IEnumerable,
-        // IAsyncEnumerable<TEntity>,
+        IAsyncEnumerable<TEntity>,
         IInfrastructure<IServiceProvider>
         where TEntity : class
     {
@@ -38,7 +38,7 @@ namespace SeedCore.Data
         readonly Type _documentType;
         readonly IEnumerable<PropertyInfo> _keys;
 
-        IQueryable<TEntity> _entityQuery;
+        // IQueryable<TEntity> _entityQuery;
         // LocalView<TEntity> _local;
 
         public DocumentDbSet(IDbContext dbcontext) : base()
@@ -253,6 +253,11 @@ namespace SeedCore.Data
         public IEnumerator<TEntity> GetEnumerator()
         {
             return EntityQuery.GetEnumerator();
+        }
+
+        public IAsyncEnumerator<TEntity> GetAsyncEnumerator(CancellationToken cancellationToken = default)
+        {
+            return EntityQuery.AsAsyncEnumerable().GetAsyncEnumerator(cancellationToken);
         }
 
         IEnumerator IEnumerable.GetEnumerator()

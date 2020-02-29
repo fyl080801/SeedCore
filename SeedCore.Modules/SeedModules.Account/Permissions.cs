@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using OrchardCore.Security;
 using OrchardCore.Security.Permissions;
 
-namespace SeedModules.Users
+namespace SeedModules.Account
 {
     public class Permissions : IPermissionProvider
     {

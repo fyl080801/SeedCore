@@ -6,7 +6,7 @@ namespace SeedModules.Controllers
     {
         public IActionResult Login()
         {
-            return Content("login");
+            return this.Spa("login.html");
         }
     }
 }

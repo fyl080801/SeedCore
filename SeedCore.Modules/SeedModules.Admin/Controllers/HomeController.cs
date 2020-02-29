@@ -21,5 +21,10 @@ namespace SeedModules.Admin.Controllers
             // _dbcontext.SaveChanges();
             return Content("admin");
         }
+
+        public IActionResult Login()
+        {
+            return Content("admin login");
+        }
     }
 }

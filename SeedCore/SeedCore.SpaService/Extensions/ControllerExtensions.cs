@@ -10,21 +10,28 @@ namespace Microsoft.AspNetCore.Mvc
 {
     public static class ControllerExtensions
     {
-        public static async Task<IActionResult> SpaAsync(this Controller controller, string file)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="controller"></param>
+        /// <param name="module"></param>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public static async Task<IActionResult> SpaAsync(this Controller controller, string module, string file)
         {
             var env = controller.ControllerContext.HttpContext.RequestServices.GetService<IHostEnvironment>();
-            var assemblyName = controller.GetType().Assembly.GetName().Name;
+            var moduleName = module ?? controller.GetType().Assembly.GetName().Name;
 
             if (env.IsDevelopment())
             {
-                var baseUriTaskFactory = SeedSpaBuilderExtensions.UrlHash[assemblyName] as Func<Task<Uri>>;
+                var baseUriTaskFactory = SeedSpaBuilderExtensions.UrlHash[moduleName] as Func<Task<Uri>>;
                 if (baseUriTaskFactory == null)
                 {
                     return await Task.FromResult(controller.View());
                 }
                 else
                 {
-                    var request = (HttpWebRequest)WebRequest.Create($"{await baseUriTaskFactory()}{assemblyName}/{file}");
+                    var request = (HttpWebRequest)WebRequest.Create($"{await baseUriTaskFactory()}{moduleName}/{file}");
                     request.Method = controller.Request.Method;
                     request.ContentType = controller.Request.ContentType;
 
@@ -40,9 +47,38 @@ namespace Microsoft.AspNetCore.Mvc
                 }
             }
 
-            return await Task.FromResult(controller.View($"~/Areas/{assemblyName}/ClientApp/dist/{file}"));
+            return await Task.FromResult(controller.View($"~/Areas/{moduleName}/ClientApp/dist/{file}"));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="controller"></param>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public static async Task<IActionResult> SpaAsync(this Controller controller, string file)
+        {
+            return await SpaAsync(controller, null, file);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="controller"></param>
+        /// <param name="module"></param>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public static IActionResult Spa(this Controller controller, string module, string file)
+        {
+            return controller.SpaAsync(module, file).Result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="controller"></param>
+        /// <param name="file"></param>
+        /// <returns></returns>
         public static IActionResult Spa(this Controller controller, string file)
         {
             return controller.SpaAsync(file).Result;

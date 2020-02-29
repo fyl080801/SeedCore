@@ -5,7 +5,7 @@ using OrchardCore.Users;
 using OrchardCore.Users.Services;
 using SeedModules.Account.Domain;
 
-namespace SeedModules.Users.Services
+namespace SeedModules.Account.Users.Services
 {
     public class MembershipService : IMembershipService
     {

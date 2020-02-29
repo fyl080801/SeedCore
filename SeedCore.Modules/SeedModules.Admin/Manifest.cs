@@ -6,6 +6,6 @@ using OrchardCore.Modules.Manifest;
     Website = "",
     Version = "1.0.0",
     Description = "",
-    Dependencies = new string[] { "SeedModules.AdminLogin", "SeedModules.Account" },
+    Dependencies = new string[] { "SeedModules.Account" },
     Category = "Management"
 )]

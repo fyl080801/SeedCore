@@ -11,7 +11,7 @@ using OrchardCore.Security.Permissions;
 using OrchardCore.Environment.Extensions.Features;
 using SeedModules.Account.Domain;
 
-namespace SeedModules.Roles.Services
+namespace SeedModules.Account.Roles
 {
     public class RoleUpdater : IFeatureEventHandler
     {

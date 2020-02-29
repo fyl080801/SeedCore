@@ -8,7 +8,7 @@ using OrchardCore.Security;
 using OrchardCore.Security.Permissions;
 using SeedModules.Account.Domain;
 
-namespace SeedModules.Roles.Recipes
+namespace SeedModules.Account.Recipes
 {
     public class RolesStep : IRecipeStepHandler
     {

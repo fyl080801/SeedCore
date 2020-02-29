@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 using OrchardCore.Security;
 using OrchardCore.Users;
 
-namespace SeedModules.Users.Services
+namespace SeedModules.Account.Users.Services
 {
     public class DefaultUserClaimsPrincipalFactory : UserClaimsPrincipalFactory<IUser, IRole>
     {

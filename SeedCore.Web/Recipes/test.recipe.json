@@ -25,6 +25,14 @@
         "Controller": "Home",
         "Area": "SeedModules.Admin"
       }
+    },
+    {
+      "name": "settings",
+      "LoginRoute": {
+        "Action": "Login",
+        "Controller": "Account",
+        "Area": "SeedModules.Account"
+      }
     }
   ]
 }

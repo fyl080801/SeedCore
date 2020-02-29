@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using OrchardCore.Security;
 using OrchardCore.Security.Services;
 
-namespace SeedModules.Roles.Services
+namespace SeedModules.Account.Roles.Services
 {
     public class RoleService : IRoleService
     {

@@ -9,7 +9,7 @@ using OrchardCore.Security;
 using OrchardCore.Security.Permissions;
 using SeedModules.Account.Domain;
 
-namespace SeedModules.Roles
+namespace SeedModules.Account.Roles
 {
     public class RolesPermissionsHandler : AuthorizationHandler<PermissionRequirement>
     {

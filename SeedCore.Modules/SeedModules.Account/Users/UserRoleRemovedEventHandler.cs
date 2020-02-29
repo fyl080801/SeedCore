@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using OrchardCore.Security;
 using OrchardCore.Users;
 
-namespace SeedModules.Users
+namespace SeedModules.Account.Users
 {
     public class UserRoleRemovedEventHandler : IRoleRemovedEventHandler
     {

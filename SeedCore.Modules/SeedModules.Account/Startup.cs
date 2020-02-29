@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Hosting;
+using OrchardCore.Environment.Commands;
 using OrchardCore.Environment.Shell;
 using OrchardCore.Modules;
 using OrchardCore.Recipes;
@@ -16,17 +18,19 @@ using OrchardCore.Setup.Events;
 using OrchardCore.Users;
 using OrchardCore.Users.Services;
 using SeedCore.Data;
-using SeedModules.Roles;
-using SeedModules.Roles.Recipes;
-using SeedModules.Roles.Services;
-using SeedModules.Users;
-using SeedModules.Users.Services;
+using SeedModules.Account.Commands;
+using SeedModules.Account.Recipes;
+using SeedModules.Account.Roles;
+using SeedModules.Account.Roles.Services;
+using SeedModules.Account.Routing;
+using SeedModules.Account.Users;
+using SeedModules.Account.Users.Services;
 
 namespace SeedModules.Account
 {
     public class Startup : StartupBase
     {
-        private const string LoginPath = "Login";
+        private const string LoginPath = "login";
         private const string ChangePasswordPath = "ChangePassword";
 
         private readonly string _tenantName;
@@ -38,6 +42,8 @@ namespace SeedModules.Account
 
         public override void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<LoginRouteTransformer>();
+
             services.AddSecurity();
             services.TryAddSingleton<ILookupNormalizer, UpperInvariantLookupNormalizer>();
             services.AddIdentity<IUser, IRole>().AddDefaultTokenProviders();
@@ -58,11 +64,15 @@ namespace SeedModules.Account
             services.TryAddScoped<IRoleStore<IRole>, RoleStore>();
             services.TryAddScoped<IRoleService, RoleService>();
             services.TryAddScoped<IRoleClaimStore<IRole>, RoleStore>();
+
+            //
             services.AddRecipeExecutionStep<RolesStep>();
 
+            //
             services.AddScoped<IFeatureEventHandler, RoleUpdater>();
             services.AddScoped<IAuthorizationHandler, RolesPermissionsHandler>();
 
+            //
             services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.Name = "seedauth_" + _tenantName;
@@ -85,10 +95,13 @@ namespace SeedModules.Account
             services.AddScoped<IMembershipService, MembershipService>();
             services.AddScoped<ISetupEventHandler, SetupEventHandler>();
 
-            // services.AddScoped<ICommandHandler, UserCommands>();
+            //
+            services.AddScoped<ICommandHandler, UserCommands>();
 
+            //
             services.AddScoped<IRoleRemovedEventHandler, UserRoleRemovedEventHandler>();
 
+            //
             services.AddScoped<IPermissionProvider, Permissions>();
             services.AddScoped<IEntityTypeConfigurationProvider, EntityTypeConfigurationProvider>();
         }
@@ -102,7 +115,18 @@ namespace SeedModules.Account
                 defaults: new { controller = "Account", action = "Login" }
             );
 
+            routes.MapDynamicControllerRoute<LoginRouteTransformer>("/" + LoginPath);
+
             app.UseAuthorization();
+
+            if (app.ApplicationServices.GetService<IHostEnvironment>().IsDevelopment())
+            {
+                app.UseSpaDevelopment(builder =>
+                {
+                    builder.Server.SuccessRegx = "Project is running at";
+                    builder.UseSpaDevelopmentServer("start");
+                });
+            }
         }
     }
 }

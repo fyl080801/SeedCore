@@ -22,6 +22,7 @@ namespace SeedCore.Settings
         public bool UseCdn { get; set; }
         public string CdnBaseUrl { get; set; }
         public RouteValueDictionary HomeRoute { get; set; } = new RouteValueDictionary();
+        public RouteValueDictionary LoginRoute { get; set; } = new RouteValueDictionary();
         public bool AppendVersion { get; set; }
     }
 }

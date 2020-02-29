@@ -15,7 +15,7 @@ using OrchardCore.Security;
 using SeedCore.Data;
 using SeedModules.Account.Domain;
 
-namespace SeedModules.Roles.Services
+namespace SeedModules.Account.Roles
 {
     public class RoleStore : IRoleClaimStore<IRole>, IQueryableRoleStore<IRole>
     {

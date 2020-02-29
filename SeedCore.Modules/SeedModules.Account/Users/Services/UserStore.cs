@@ -14,7 +14,7 @@ using OrchardCore.Users.Handlers;
 using SeedCore.Data;
 using SeedModules.Account.Domain;
 
-namespace SeedModules.Users.Services
+namespace SeedModules.Account.Users.Services
 {
     public class UserStore :
         IUserClaimStore<IUser>,

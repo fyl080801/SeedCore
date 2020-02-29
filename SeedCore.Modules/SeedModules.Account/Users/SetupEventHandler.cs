@@ -1,16 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using OrchardCore.Security;
-using OrchardCore.Security.Services;
 using OrchardCore.Setup.Events;
 using OrchardCore.Users.Services;
 using SeedCore.Data;
 using SeedModules.Account.Domain;
 
-namespace SeedModules.Users
+namespace SeedModules.Account.Users
 {
     public class SetupEventHandler : ISetupEventHandler
     {

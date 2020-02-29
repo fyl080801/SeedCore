@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import 'bootstrap/dist/css/bootstrap-grid.css';
 import 'antd/dist/antd.css';
 import './App.css';
 
-export default props => {
+export default () => {
   return <div className="container">sss!!</div>;
 };

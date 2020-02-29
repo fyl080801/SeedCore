@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SeedCore.Abstractions\SeedCore.Abstractions.csproj" />
+    <ProjectReference Include="..\SeedCore.Data\SeedCore.Data.csproj" />
   </ItemGroup>
 
 </Project>

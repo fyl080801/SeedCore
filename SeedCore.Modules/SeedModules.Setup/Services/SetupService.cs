@@ -18,7 +18,7 @@ using OrchardCore.Setup.Events;
 using OrchardCore.Setup.Services;
 using SeedCore.Data;
 
-namespace SeedCore.Setup.Services
+namespace SeedModules.Setup.Services
 {
     public class SetupService : ISetupService
     {

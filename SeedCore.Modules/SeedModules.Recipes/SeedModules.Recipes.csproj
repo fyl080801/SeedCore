@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SeedCore\SeedCore.Infrastructure\SeedCore.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\SeedCore\SeedCore\SeedCore.csproj" />
     <ProjectReference Include="..\SeedModules.Features\SeedModules.Features.csproj" />
   </ItemGroup>
 

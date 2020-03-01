@@ -439,7 +439,7 @@ module.exports = function(webpackEnv) {
           chunkFilename: 'static/css/[name].[contenthash:8].chunk.css'
         }),
       new ManifestPlugin({
-        fileName: 'asset-index-manifest.json',
+        fileName: 'asset-manifest.json',
         publicPath: paths.publicUrlOrPath,
         generate: (seed, files, entrypoints) => {
           const manifestFiles = files.reduce((manifest, file) => {
@@ -453,29 +453,31 @@ module.exports = function(webpackEnv) {
 
           return {
             files: manifestFiles,
-            entrypoints: entrypointFiles
+            entrypoints: entrypointFiles.concat(
+              entrypoints.login.filter(fileName => !fileName.endsWith('.map'))
+            )
           };
         }
       }),
-      // 增加一个新的ManifestPlugin
-      new ManifestPlugin({
-        fileName: 'asset-login-manifest.json',
-        publicPath: paths.publicUrlOrPath,
-        generate: (seed, files, entrypoints) => {
-          const manifestFiles = files.reduce((manifest, file) => {
-            manifest[file.name] = file.path;
-            return manifest;
-          }, seed);
-          const entrypointFiles = entrypoints.login.filter(
-            fileName => !fileName.endsWith('.map')
-          );
+      // // 增加一个新的ManifestPlugin
+      // new ManifestPlugin({
+      //   fileName: 'asset-login-manifest.json',
+      //   publicPath: paths.publicUrlOrPath,
+      //   generate: (seed, files, entrypoints) => {
+      //     const manifestFiles = files.reduce((manifest, file) => {
+      //       manifest[file.name] = file.path;
+      //       return manifest;
+      //     }, seed);
+      //     const entrypointFiles = entrypoints.login.filter(
+      //       fileName => !fileName.endsWith('.map')
+      //     );
 
-          return {
-            files: manifestFiles,
-            entrypoints: entrypointFiles
-          };
-        }
-      }),
+      //     return {
+      //       files: manifestFiles,
+      //       entrypoints: entrypointFiles
+      //     };
+      //   }
+      // }),
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
       isEnvProduction &&
         new WorkboxWebpackPlugin.GenerateSW({

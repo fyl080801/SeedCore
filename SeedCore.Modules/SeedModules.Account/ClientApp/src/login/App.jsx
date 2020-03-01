@@ -43,8 +43,6 @@ export default () => {
         footer={null}
       >
         <Form
-          // form={form}
-
           name="normal_login"
           className="login-form"
           initialValues={{
@@ -76,7 +74,7 @@ export default () => {
             <Form.Item name="rememberMe" valuePropName="checked" noStyle>
               <Checkbox>记住用户</Checkbox>
             </Form.Item>
-            <a className="login-form-forgot" href="">
+            <a href="/" className="login-form-forgot">
               忘记密码
             </a>
           </div>
@@ -88,7 +86,7 @@ export default () => {
             >
               登录
             </Button>
-            或 <a href="">立即注册</a>
+            或 <a href="/">立即注册</a>
           </Form.Item>
           <Form.Item name={cookie.load('XSRF-FIELD')} noStyle>
             <Input type="hidden" />

@@ -22,27 +22,20 @@ namespace Microsoft.AspNetCore.Mvc
             var env = controller.ControllerContext.HttpContext.RequestServices.GetService<IHostEnvironment>();
             var moduleName = module ?? controller.GetType().Assembly.GetName().Name;
 
-            if (env.IsDevelopment())
+            if (env.IsDevelopment() && SeedSpaBuilderExtensions.UrlHash.ContainsKey(moduleName))
             {
                 var baseUriTaskFactory = SeedSpaBuilderExtensions.UrlHash[moduleName] as Func<Task<Uri>>;
-                if (baseUriTaskFactory == null)
-                {
-                    return await Task.FromResult(controller.View());
-                }
-                else
-                {
-                    var request = (HttpWebRequest)WebRequest.Create($"{await baseUriTaskFactory()}{moduleName}/{file}");
-                    request.Method = controller.Request.Method;
-                    request.ContentType = controller.Request.ContentType;
+                var request = (HttpWebRequest)WebRequest.Create($"{await baseUriTaskFactory()}{moduleName}/{file}");
+                request.Method = controller.Request.Method;
+                request.ContentType = controller.Request.ContentType;
 
-                    using (var response = (HttpWebResponse)request.GetResponse())
+                using (var response = (HttpWebResponse)request.GetResponse())
+                {
+                    using (var responseStream = response.GetResponseStream())
                     {
-                        using (var responseStream = response.GetResponseStream())
-                        {
-                            var responseReader = new StreamReader(responseStream, Encoding.GetEncoding(response.CharacterSet));
-                            var responseText = responseReader.ReadToEnd();
-                            return await Task.FromResult(controller.Content(responseText, response.ContentType));
-                        }
+                        var responseReader = new StreamReader(responseStream, Encoding.GetEncoding(response.CharacterSet));
+                        var responseText = responseReader.ReadToEnd();
+                        return await Task.FromResult(controller.Content(responseText, response.ContentType));
                     }
                 }
             }

@@ -1,11 +1,11 @@
 using OrchardCore.Modules.Manifest;
 
 [assembly: Module(
-    Name = "Admin",
+    Name = "AdminMenu",
     Author = "",
     Website = "",
     Version = "1.0.0",
     Description = "",
-    Dependencies = new string[] { "SeedModules.Account", "SeedModules.AdminMenu" },
+    Dependencies = new string[] { },
     Category = "Management"
 )]

@@ -26,6 +26,11 @@ namespace SeedCore.SpaService.Internal
             var pkgManagerCommand = spaBuilder.Server.PkgManagerCommand;
             var devServerPort = spaBuilder.Server.DevServerPort;
 
+            if (!Directory.Exists(sourcePath))
+            {
+                return;
+            }
+
             if (string.IsNullOrEmpty(scriptName))
             {
                 throw new ArgumentException("Cannot be null or empty", nameof(scriptName));

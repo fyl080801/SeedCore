@@ -6,7 +6,9 @@ export default props => {
 
   useEffect(() => {
     props.body.forEach(node => {
-      if (contentBody.current) contentBody.current.appendChild(node);
+      if (contentBody.current) {
+        contentBody.current.appendChild(node);
+      }
     });
 
     // if (props.site.__proto__ === Promise.prototype) {

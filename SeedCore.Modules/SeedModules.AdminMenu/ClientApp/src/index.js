@@ -1,6 +1,6 @@
 import bootstrap from './bootstrap';
+import './index.css';
 
-// window.adminmenu = bootstrap;
 bootstrap({});
 
 export { bootstrap };

@@ -1,0 +1,22 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "renenw_frontend",
+            "dialect": "MySQL",
+            "name": "renenw_frontend",
+            "password": "!QAZ2wsx",
+            "port": 3306,
+            "server": "localhost",
+            "username": "root"
+        },
+        {
+            "database": "seedcoredev",
+            "dialect": "MySQL",
+            "name": "seedcoredev",
+            "password": "!QAZ2wsx",
+            "port": 3306,
+            "server": "localhost",
+            "username": "root"
+        }
+    ]
+}

@@ -1,5 +1,5 @@
 import bootstrap from './bootstrap';
-import './index.css';
+// import './index.css';
 
 bootstrap({});
 

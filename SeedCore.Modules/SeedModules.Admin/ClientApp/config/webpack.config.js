@@ -116,8 +116,7 @@ module.exports = function(webpackEnv) {
         isEnvDevelopment &&
           require.resolve('react-dev-utils/webpackHotDevClient'),
         paths.appIndexJs
-      ].filter(Boolean),
-      navi: [paths.naviIndexJs].filter(Boolean)
+      ].filter(Boolean)
     },
     output: {
       path: isEnvProduction ? paths.appBuild : undefined,
@@ -400,13 +399,9 @@ module.exports = function(webpackEnv) {
             manifest[file.name] = file.path;
             return manifest;
           }, seed);
-          const entrypointFiles = []
-            .concat(
-              entrypoints.main.filter(fileName => !fileName.endsWith('.map'))
-            )
-            .concat(
-              entrypoints.navi.filter(fileName => !fileName.endsWith('.map'))
-            );
+          const entrypointFiles = [].concat(
+            entrypoints.main.filter(fileName => !fileName.endsWith('.map'))
+          );
 
           return {
             files: manifestFiles,

@@ -18,18 +18,26 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader'
-          }
-        ]
+        loader: 'style-loader!css-loader?modules'
+      },
+      {
+        test: /\.less$/,
+        exclude: /node_modules/,
+        loader: 'style-loader!css-loader?modules!less-loader'
+      },
+      // 如果使用 moudles 并且 less 里 import 了 antd
+      // less 类名会被转义
+      {
+        test: /\.less$/,
+        include: /node_modules|antd\.less/,
+        loader: 'style-loader!css-loader!less-loader'
       }
     ]
   },
-  plugins: [new CleanWebpackPlugin()],
+  plugins: [
+    new CleanWebpackPlugin()
+    // new MiniCssExtractPlugin({ filename: 'navi.css', esModule: true })
+  ],
   externals: {
     // react: 'react',
     // 'react-dom': 'react-dom'

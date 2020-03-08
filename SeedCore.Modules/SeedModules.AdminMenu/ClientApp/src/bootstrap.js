@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Navigation from './Navigation';
+import Navigation from './components/Navigation';
+import styles from './index.less';
 
 const bootstrap = config => {
   const documentReady = (function() {
@@ -55,7 +56,7 @@ const bootstrap = config => {
       content.push(node);
     });
     const root = document.createElement('div');
-    root.className = 'navi';
+    root.className = styles.navi;
     ReactDOM.render(
       <Navigation body={content} site={config.site} />,
       document.body.appendChild(root)

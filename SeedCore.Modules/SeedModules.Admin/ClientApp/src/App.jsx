@@ -5,5 +5,5 @@ import 'antd/dist/antd.css';
 import './App.css';
 
 export default () => {
-  return <div className="container">admin logined</div>;
+  return <div>admin logined</div>;
 };

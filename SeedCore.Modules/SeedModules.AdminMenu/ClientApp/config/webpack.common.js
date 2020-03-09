@@ -1,4 +1,5 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const paths = require('./paths');
 
@@ -35,7 +36,8 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new BundleAnalyzerPlugin()
     // new MiniCssExtractPlugin({ filename: 'navi.css', esModule: true })
   ],
   externals: {

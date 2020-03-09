@@ -1,7 +1,5 @@
 import React from 'react';
-import Avatar from 'antd/es/avatar';
-import Menu from 'antd/es/menu';
-import Modal from 'antd/es/modal';
+import { Avatar, Menu, Modal } from 'antd';
 import {
   LogoutOutlined,
   QuestionCircleFilled,
@@ -11,8 +9,6 @@ import {
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 import { logout } from '../../api/account';
-
-console.log(styles);
 
 export default props => {
   const { menu } = props;

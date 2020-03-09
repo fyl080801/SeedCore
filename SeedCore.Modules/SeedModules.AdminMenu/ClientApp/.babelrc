@@ -3,5 +3,26 @@
     ["@babel/preset-env", { "corejs": "2", "useBuiltIns": "usage" }],
     "@babel/preset-react"
   ],
-  "plugins": ["@babel/plugin-transform-runtime"]
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    ["import", { "libraryName": "antd", "libraryDirectory": "es" }],
+    [
+      "import",
+      {
+        "libraryName": "@ant-design/icons",
+        "libraryDirectory": "es/icons",
+        "camel2DashComponentName": false
+      },
+      "@ant-design/icons"
+    ],
+    [
+      "import",
+      {
+        "libraryName": "@ant-design/pro-layout",
+        "libraryDirectory": "es",
+        "camel2DashComponentName": false
+      },
+      "@ant-design/pro-layout"
+    ]
+  ]
 }

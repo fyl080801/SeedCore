@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import BasicLayout from '@ant-design/pro-layout/es/BasicLayout';
+import { BasicLayout } from '@ant-design/pro-layout';
 import RightContent from './Header/RightContent';
 
 export default props => {

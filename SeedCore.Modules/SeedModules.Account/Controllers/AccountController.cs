@@ -73,6 +73,13 @@ namespace SeedModules.Account.Controllers
             return this.Spa("login.html");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Logout(string returnUrl)
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectTo(returnUrl);
+        }
+
         private IActionResult RedirectTo(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))

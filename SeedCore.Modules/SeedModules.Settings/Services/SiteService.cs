@@ -76,6 +76,12 @@ namespace SeedCore.Settings.Services
             return site;
         }
 
+
+        public Task<ISite> LoadSiteSettingsAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         /// <inheritdoc/>
         public async Task UpdateSiteSettingsAsync(ISite site)
         {
@@ -114,5 +120,6 @@ namespace SeedCore.Settings.Services
         {
             return ShellScope.Services.GetService<IDbContext>();
         }
+
     }
 }

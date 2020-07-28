@@ -39,5 +39,10 @@ namespace SeedModules.Account.Roles.Services
         {
             return Task.FromResult<IEnumerable<string>>(_roleManager.Roles.Select(a => a.RoleName));
         }
+
+        public Task<IEnumerable<IRole>> GetRolesAsync()
+        {
+            return Task.FromResult<IEnumerable<IRole>>(_roleManager.Roles);
+        }
     }
 }

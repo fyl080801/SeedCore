@@ -53,7 +53,7 @@ namespace SeedModules.Account.Commands
 
             if (valid)
             {
-                Context.Output.WriteLine(T["User created successfully"]);
+                Context.Output.WriteLine(S["User created successfully"]);
             }
         }
     }

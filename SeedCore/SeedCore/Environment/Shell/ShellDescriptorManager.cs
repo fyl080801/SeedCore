@@ -108,7 +108,7 @@ namespace SeedCore.Environment.Shell.Data.Descriptors
             }
 
             var dbset = _context.Set<ShellDescriptor>();
-            var exisit = await dbset.FindAsync(shellDescriptorRecord.Id);
+            var exisit = await dbset.FindAsync(shellDescriptorRecord.SerialNumber);
 
             if (exisit != null)
             {
@@ -123,7 +123,8 @@ namespace SeedCore.Environment.Shell.Data.Descriptors
             // Update cached reference
             _shellDescriptor = shellDescriptorRecord;
 
-            await _shellDescriptorManagerEventHandlers.InvokeAsync(e => e.Changed(shellDescriptorRecord, _shellSettings.Name), _logger);
+            await _shellDescriptorManagerEventHandlers.InvokeAsync((handler, shellDescriptorRecord, _shellSettings) =>
+                handler.ChangedAsync(shellDescriptorRecord, _shellSettings), shellDescriptorRecord, _shellSettings, _logger);
         }
 
         private class ConfiguredFeatures

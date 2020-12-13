@@ -34,38 +34,38 @@ namespace SeedModules.Account.Roles
 
         public ILogger Logger { get; set; }
 
-        void IFeatureEventHandler.Installing(IFeatureInfo feature)
-        {
-        }
+        // void IFeatureEventHandler.Installing(IFeatureInfo feature)
+        // {
+        // }
 
-        void IFeatureEventHandler.Installed(IFeatureInfo feature)
-        {
-            AddDefaultRolesForFeatureAsync(feature).Wait();
-        }
+        // void IFeatureEventHandler.Installed(IFeatureInfo feature)
+        // {
+        //     AddDefaultRolesForFeatureAsync(feature).Wait();
+        // }
 
-        void IFeatureEventHandler.Enabling(IFeatureInfo feature)
-        {
-        }
+        // void IFeatureEventHandler.Enabling(IFeatureInfo feature)
+        // {
+        // }
 
-        void IFeatureEventHandler.Enabled(IFeatureInfo feature)
-        {
-        }
+        // void IFeatureEventHandler.Enabled(IFeatureInfo feature)
+        // {
+        // }
 
-        void IFeatureEventHandler.Disabling(IFeatureInfo feature)
-        {
-        }
+        // void IFeatureEventHandler.Disabling(IFeatureInfo feature)
+        // {
+        // }
 
-        void IFeatureEventHandler.Disabled(IFeatureInfo feature)
-        {
-        }
+        // void IFeatureEventHandler.Disabled(IFeatureInfo feature)
+        // {
+        // }
 
-        void IFeatureEventHandler.Uninstalling(IFeatureInfo feature)
-        {
-        }
+        // void IFeatureEventHandler.Uninstalling(IFeatureInfo feature)
+        // {
+        // }
 
-        void IFeatureEventHandler.Uninstalled(IFeatureInfo feature)
-        {
-        }
+        // void IFeatureEventHandler.Uninstalled(IFeatureInfo feature)
+        // {
+        // }
 
         public async Task AddDefaultRolesForFeatureAsync(IFeatureInfo feature)
         {
@@ -124,6 +124,47 @@ namespace SeedModules.Account.Roles
                     }
                 }
             }
+        }
+
+        public Task DisabledAsync(IFeatureInfo feature)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task DisablingAsync(IFeatureInfo feature)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task EnabledAsync(IFeatureInfo feature)
+        {
+
+            return Task.CompletedTask;
+        }
+
+        public Task EnablingAsync(IFeatureInfo feature)
+        {
+            return Task.CompletedTask;
+        }
+
+        public async Task InstalledAsync(IFeatureInfo feature)
+        {
+            await AddDefaultRolesForFeatureAsync(feature);
+        }
+
+        public Task InstallingAsync(IFeatureInfo feature)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task UninstalledAsync(IFeatureInfo feature)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task UninstallingAsync(IFeatureInfo feature)
+        {
+            return Task.CompletedTask;
         }
     }
 }

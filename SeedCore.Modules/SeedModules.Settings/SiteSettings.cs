@@ -1,5 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Routing;
+using Newtonsoft.Json;
 using OrchardCore.Entities;
 using OrchardCore.Settings;
 
@@ -24,5 +25,8 @@ namespace SeedCore.Settings
         public RouteValueDictionary HomeRoute { get; set; } = new RouteValueDictionary();
         public RouteValueDictionary LoginRoute { get; set; } = new RouteValueDictionary();
         public bool AppendVersion { get; set; }
+
+        [JsonIgnore]
+        public bool IsReadonly { get; set; }
     }
 }

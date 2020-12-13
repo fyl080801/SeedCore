@@ -32,7 +32,7 @@
     "eslint-plugin-react-hooks": "^1.6.1",
     "file-loader": "4.3.0",
     "fs-extra": "^8.1.0",
-    "html-webpack-plugin": "4.0.0-beta.11",
+    "html-webpack-plugin": "4.0.0",
     "identity-obj-proxy": "3.0.0",
     "jest": "25.0.0",
     "jest-environment-jsdom-fourteen": "1.0.1",
@@ -56,18 +56,21 @@
     "sass-loader": "8.0.2",
     "semver": "6.3.0",
     "style-loader": "0.23.1",
-    "terser-webpack-plugin": "2.3.4",
+    "terser-webpack-plugin": "2.3.6",
     "ts-pnp": "1.1.5",
     "url-loader": "2.3.0",
     "webpack": "4.41.5",
-    "webpack-dev-server": "3.10.2",
+    "webpack-dev-server": "3.11.0",
     "webpack-manifest-plugin": "2.2.0",
-    "workbox-webpack-plugin": "4.3.1"
+    "workbox-webpack-plugin": "4.3.1",
+    "snyk": "^1.341.2"
   },
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -138,5 +141,6 @@
     "presets": [
       "react-app"
     ]
-  }
+  },
+  "snyk": true
 }

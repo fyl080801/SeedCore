@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Migrations.Design;
+using Microsoft.EntityFrameworkCore.Migrations.Internal;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace SeedCore.Data.Migrations
@@ -41,17 +42,28 @@ namespace SeedCore.Data.Migrations
             }
             catch (DbException) { }
 
+            var designTimeServices = new DesignTimeServicesBuilder(
+                context.Context.GetType().Assembly,
+                context.Context.GetType().Assembly,
+                new OperationReporter(),
+                new string[0]).Build(context.Context);
+            var process = designTimeServices.GetService<ISnapshotModelProcessor>();
+
             // 需要从历史版本库中取出快照定义，反序列化成类型 GetDifferences(快照模型, context.Model);
             // 实际情况下要传入历史快照
             var modelDiffer = contextServiceProvider.GetService<IMigrationsModelDiffer>();
-            var hasDiffer = modelDiffer.HasDifferences(lastModel, context.Context.Model);
+            var hasDiffer = modelDiffer.HasDifferences(
+                lastModel != null ? process.Process(lastModel).GetRelationalModel() : null,
+                context.Context.Model.GetRelationalModel());
 
             if (!hasDiffer)
             {
                 return;
             }
 
-            var upOperations = modelDiffer.GetDifferences(lastModel, context.Context.Model);
+            var upOperations = modelDiffer.GetDifferences(
+                lastModel != null ? lastModel.GetRelationalModel() : null,
+                context.Context.Model.GetRelationalModel());
 
             using (var trans = context.Context.Database.BeginTransaction())
             {
@@ -72,7 +84,7 @@ namespace SeedCore.Data.Migrations
 
                 context.Migrations.Add(new MigrationRecord()
                 {
-                    SnapshotDefine = await CreateSnapshotCode(context),
+                    SnapshotDefine = await CreateSnapshotCode(designTimeServices, context),
                     MigrationTime = DateTime.Now
                 });
 
@@ -80,7 +92,7 @@ namespace SeedCore.Data.Migrations
             }
         }
 
-        private async Task<string> CreateSnapshotCode(IDbContext context)
+        private async Task<string> CreateSnapshotCode(IServiceProvider services, IDbContext context)
         {
             try
             {
@@ -89,12 +101,7 @@ namespace SeedCore.Data.Migrations
                 // string snapshotCode = designInstance.GetInfrastructure()
                 //     .GetService<IMigrationsCodeGenerator>()
                 //     .GenerateSnapshot(ContextAssembly, context.GetType(), SnapshotName, context.Context.Model);
-                string snapshotCode = new DesignTimeServicesBuilder(
-                    context.Context.GetType().Assembly,
-                    context.Context.GetType().Assembly,
-                    new OperationReporter(),
-                    new string[0])
-                        .Build(context.Context)
+                string snapshotCode = services
                         .GetService<IMigrationsCodeGenerator>()
                         .GenerateSnapshot(ContextAssembly, context.Context.GetType(), SnapshotName, context.Context.Model);
                 return await Task.FromResult(Convert.ToBase64String(Encoding.UTF8.GetBytes(snapshotCode)));

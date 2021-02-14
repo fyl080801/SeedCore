@@ -10,7 +10,7 @@
       "request": "launch",
       "preLaunchTask": "build",
       // If you have changed target frameworks, make sure to update the program path.
-      "program": "${workspaceFolder}/SeedCore.Web/bin/Debug/netcoreapp3.1/SeedCore.Web.dll",
+      "program": "${workspaceFolder}/SeedCore.Web/bin/Debug/netcoreapp5/SeedCore.Web.dll",
       "args": [],
       "cwd": "${workspaceFolder}/SeedCore.Web",
       "stopAtEntry": false,

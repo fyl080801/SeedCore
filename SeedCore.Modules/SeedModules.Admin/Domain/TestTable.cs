@@ -17,6 +17,8 @@ namespace SeedModules.Admin.Domain
 
         public string Remark { get; set; }
 
+        public int? Age { get; set; }
+
         public DateTime? CreateTime { get; set; }
     }
 

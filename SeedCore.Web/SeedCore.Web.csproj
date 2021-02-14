@@ -3,7 +3,7 @@
   <Import Project="..\SeedCore.Build\Dependencies.props" />
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp5</TargetFramework>
     <TieredCompilation>true</TieredCompilation>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsNotAsErrors>612,618</WarningsNotAsErrors>

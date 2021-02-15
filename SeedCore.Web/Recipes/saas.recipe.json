@@ -27,7 +27,7 @@
       "HomeRoute": {
         "Action": "Index",
         "Controller": "Home",
-        "Area": "TheTheme"
+        "Area": "SeedModules.Admin"
       }
     }
   ]

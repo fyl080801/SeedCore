@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import Dropdown from 'antd/es/dropdown';
+import { Dropdown } from 'antd';
 import styles from './index.less';
 
 export default ({ overlayClassName: cls, ...restProps }) => {

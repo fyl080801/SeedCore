@@ -36,7 +36,7 @@ namespace SeedModules.Account.Users.Services
             IRoleClaimStore<IRole> roleClaimStore,
             ILookupNormalizer keyNormalizer,
             ILogger<UserStore> logger,
-            IEnumerable<IUserCreatedEventHandler> handlers)
+            IEnumerable<IUserEventHandler> handlers)
         {
             _dbcontext = dbcontext;
             _roleService = roleService;
@@ -46,7 +46,7 @@ namespace SeedModules.Account.Users.Services
             Handlers = handlers;
         }
 
-        public IEnumerable<IUserCreatedEventHandler> Handlers { get; private set; }
+        public IEnumerable<IUserEventHandler> Handlers { get; private set; }
 
         public void Dispose()
         {
@@ -71,7 +71,7 @@ namespace SeedModules.Account.Users.Services
                 _dbcontext.Set<User>().Add(newuser);
                 _dbcontext.SaveChanges();
 
-                var context = new CreateUserContext(user);
+                var context = new UserContext(user);
                 await Handlers.InvokeAsync(handler => handler.CreatedAsync(context), _logger);
             }
             catch

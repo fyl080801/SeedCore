@@ -4,10 +4,12 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
+// using MySqlConnector;
 using OrchardCore.Environment.Shell;
 using OrchardCore.Modules;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
-using Pomelo.EntityFrameworkCore.MySql.Storage;
+// using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+// using Pomelo.EntityFrameworkCore.MySql.Storage;
 
 namespace SeedCore.Data
 {
@@ -82,11 +84,14 @@ namespace SeedCore.Data
                     });
                     break;
                 case "MySql":
-                    optionBuilder.UseMySql(_settings["ConnectionString"], ob =>
-                    {
-                        ob.CharSetBehavior(CharSetBehavior.AppendToAllColumns);
-                        ob.CharSet(CharSet.Utf8Mb4);
-                    });
+                    optionBuilder.UseMySql(
+                        _settings["ConnectionString"],
+                        ServerVersion.AutoDetect(_settings["ConnectionString"]),
+                        ob =>
+                        {
+                            ob.CharSetBehavior(CharSetBehavior.AppendToAllColumns);
+                            ob.CharSet(CharSet.Utf8Mb4);
+                        });
                     break;
                 default:
                     throw new ArgumentException("未知数据访问提供程序: " + _settings["DatabaseProvider"]);

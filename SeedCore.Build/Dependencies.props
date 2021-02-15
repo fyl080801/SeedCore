@@ -4,26 +4,28 @@
 
   <ItemGroup>
     <!-- OrchardCore -->
-    <PackageManagement Include="OrchardCore.Module.Targets" Version="1.0.0-rc1-10004"/>
-    <PackageManagement Include="OrchardCore.Recipes.Abstractions" Version="1.0.0-rc1-10004" />
-    <PackageManagement Include="OrchardCore.Recipes.Core" Version="1.0.0-rc1-10004" />
-    <PackageManagement Include="OrchardCore.Abstractions" Version="1.0.0-rc1-10004" />
-    <PackageManagement Include="OrchardCore" Version="1.0.0-rc1-10004" />
-    <PackageManagement Include="OrchardCore.Setup.Abstractions" Version="1.0.0-rc1-10004" />
-    <PackageManagement Include="OrchardCore.Infrastructure.Abstractions" Version="1.0.0-rc1-10004" />
-    <PackageManagement Include="OrchardCore.Infrastructure" Version="1.0.0-rc1-10004" />
-    <PackageManagement Include="OrchardCore.Application.Mvc.Targets" Version="1.0.0-rc1-10004" />
-    <PackageManagement Include="OrchardCore.Scripting" Version="1.0.0-rc1-10004" />
-    <PackageManagement Include="OrchardCore.Logging.NLog" Version="1.0.0-rc1-10004" />
-    <PackageManagement Include="OrchardCore.HomeRoute" Version="1.0.0-rc1-10004" />
-    <PackageManagement Include="OrchardCore.Scripting.JavaScript" Version="1.0.0-rc1-10004"/>
-    <PackageManagement Include="OrchardCore.Users.Abstractions" Version="1.0.0-rc1-10004" />
+    <PackageManagement Include="OrchardCore.Module.Targets" Version="1.0.0-rc2-13450"/>
+    <PackageManagement Include="OrchardCore.Recipes.Abstractions" Version="1.0.0-rc2-13450" />
+    <PackageManagement Include="OrchardCore.Recipes.Core" Version="1.0.0-rc2-13450" />
+    <PackageManagement Include="OrchardCore.Abstractions" Version="1.0.0-rc2-13450" />
+    <PackageManagement Include="OrchardCore" Version="1.0.0-rc2-13450" />
+    <PackageManagement Include="OrchardCore.Setup.Abstractions" Version="1.0.0-rc2-13450" />
+    <PackageManagement Include="OrchardCore.Infrastructure.Abstractions" Version="1.0.0-rc2-13450" />
+    <PackageManagement Include="OrchardCore.Infrastructure" Version="1.0.0-rc2-13450" />
+    <PackageManagement Include="OrchardCore.Application.Mvc.Targets" Version="1.0.0-rc2-13450" />
+    <PackageManagement Include="OrchardCore.Scripting" Version="1.0.0-rc2-13450" />
+    <PackageManagement Include="OrchardCore.Logging.NLog" Version="1.0.0-rc2-13450" />
+    <PackageManagement Include="OrchardCore.HomeRoute" Version="1.0.0-rc2-13450" />
+    <PackageManagement Include="OrchardCore.Scripting.JavaScript" Version="1.0.0-rc2-13450"/>
+    <PackageManagement Include="OrchardCore.Users.Abstractions" Version="1.0.0-rc2-13450" />
     <!-- Packages -->
     <PackageManagement Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageManagement Include="NLog.Web.AspNetCore" Version="4.8.5" />
-    <PackageManagement Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.1" />
+    <PackageManagement Include="NLog.Web.AspNetCore" Version="4.9.3" />
+    <PackageManagement Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.0-alpha.2" />
     <PackageManagement Include="Pomelo.EntityFrameworkCore.MySql.Design" Version="1.1.2" />
-    <PackageManagement Include="System.CodeDom" Version="4.7.0" />
+    <!-- <PackageManagement Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
+    <PackageManagement Include="MySql.Data.EntityFrameworkCore.Design" Version="8.0.19" /> -->
+    <PackageManagement Include="System.CodeDom" Version="5.0.0" />
     <PackageManagement Include="System.Runtime" Version="4.3.1" />
   </ItemGroup>
 

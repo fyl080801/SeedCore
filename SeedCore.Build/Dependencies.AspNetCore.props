@@ -1,21 +1,22 @@
 <Project>
   <ItemGroup>
-    <PackageManagement Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
-    <PackageManagement Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.2" />
-    <PackageManagement Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.2" />
-    <PackageManagement Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
-    <PackageManagement Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2"/>
-    <PackageManagement Include="Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore" Version="3.1.1"/>
-    <PackageManagement Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.2" />
-    <PackageManagement Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.2" />
-    <PackageManagement Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="3.1.2" />
-    <PackageManagement Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.2" />
-    <PackageManagement Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.2" />
-    <PackageManagement Include="Microsoft.AspNetCore.SpaServices" Version="3.1.2" />
-    <PackageManagement Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.2" />
-    <PackageManagement Include="Microsoft.AspNetCore.NodeServices" Version="3.1.2" />
-    <PackageManagement Include="Microsoft.CodeAnalysis.Common" Version="3.3.1" />
-    <PackageManagement Include="Microsoft.CodeAnalysis.CSharp" Version="3.3.1" />
+    <PackageManagement Include="Microsoft.EntityFrameworkCore" Version="5.0.3" />
+    <PackageManagement Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.3" />
+    <PackageManagement Include="Microsoft.EntityFrameworkCore.Relational.Design" Version="1.1.6"/>
+    <PackageManagement Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.3" />
+    <PackageManagement Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.3" />
+    <PackageManagement Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.3"/>
+    <PackageManagement Include="Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore" Version="5.0.2"/>
+    <PackageManagement Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+    <PackageManagement Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.1" />
+    <PackageManagement Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="5.0.1" />
+    <PackageManagement Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.1" />
+    <PackageManagement Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.1" />
+    <PackageManagement Include="Microsoft.AspNetCore.SpaServices" Version="5.0.0-preview.8.20414.8" />
+    <PackageManagement Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.1" />
+    <PackageManagement Include="Microsoft.AspNetCore.NodeServices" Version="5.0.0-preview.8.20414.8" />
+    <PackageManagement Include="Microsoft.CodeAnalysis.Common" Version="3.9.0-2.final" />
+    <PackageManagement Include="Microsoft.CodeAnalysis.CSharp" Version="3.9.0-2.final" />
     <PackageManagement Include="Microsoft.CSharp" Version="4.7.0" />
   </ItemGroup>
 </Project>

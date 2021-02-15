@@ -6,7 +6,7 @@ namespace SeedCore.Data
     {
         public InitlizationDbContext(DbContextOptions options) : base(options)
         {
-
+            
         }
     }
 }

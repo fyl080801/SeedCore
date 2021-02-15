@@ -26,6 +26,9 @@ namespace SeedModules.Account.Domain
 
         public virtual List<UserRole> Users { get; set; } = new List<UserRole>();
 
+        [StringLength(255)]
+        public string RoleDescription { get; set; }
+
         public RoleInfo() { }
 
         public RoleInfo(string rolename)

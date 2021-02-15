@@ -87,7 +87,8 @@ namespace SeedModules.Account
                 // Disabling same-site is required for OpenID's module prompt=none support to work correctly.
                 // Note: it has no practical impact on the security of the site since all endpoints are always
                 // protected by antiforgery checks, that are enforced with or without this setting being changed.
-                options.Cookie.SameSite = SameSiteMode.None;
+                // 先禁用，不然必须是 https + Secure
+                // options.Cookie.SameSite = SameSiteMode.None;
             });
 
             services.AddScoped<IUserService, UserService>();

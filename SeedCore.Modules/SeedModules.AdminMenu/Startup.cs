@@ -19,14 +19,14 @@ namespace SeedModules.AdminMenu
 
         public override void Configure(IApplicationBuilder app, IEndpointRouteBuilder routes, IServiceProvider serviceProvider)
         {
-            if (serviceProvider.GetService<IHostEnvironment>().IsDevelopment())
-            {
-                app.UseSpaDevelopment(builder =>
-                {
-                    builder.Server.SuccessRegx = "Compiled successfully";
-                    builder.UseSpaDevelopmentServer("start");
-                });
-            }
+            // if (serviceProvider.GetService<IHostEnvironment>().IsDevelopment())
+            // {
+            //     app.UseSpaDevelopment(builder =>
+            //     {
+            //         builder.Server.SuccessRegx = "Compiled successfully";
+            //         builder.UseSpaDevelopmentServer("start");
+            //     });
+            // }
         }
     }
 }

@@ -19,14 +19,14 @@ namespace SeedModules.Admin
         {
             // routes.MapAreaControllerRoute("Admin", "SeedModules.Admin", "", new { controller = "Home", Action = "Index" });
 
-            if (serviceProvider.GetService<IHostEnvironment>().IsDevelopment())
-            {
-                app.UseSpaDevelopment(builder =>
-                {
-                    builder.Server.SuccessRegx = "Project is running at";
-                    builder.UseSpaDevelopmentServer("start");
-                });
-            }
+            // if (serviceProvider.GetService<IHostEnvironment>().IsDevelopment())
+            // {
+            //     app.UseSpaDevelopment(builder =>
+            //     {
+            //         builder.Server.SuccessRegx = "Project is running at";
+            //         builder.UseSpaDevelopmentServer("start");
+            //     });
+            // }
         }
     }
 }

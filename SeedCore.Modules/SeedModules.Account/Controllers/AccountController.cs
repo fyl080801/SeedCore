@@ -37,12 +37,13 @@ namespace SeedModules.Account.Controllers
         [AllowAnonymous]
         public IActionResult Login()
         {
-            return this.Spa("login.html");
+            // return this.Spa("index.html");
+            return View();
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login([FromForm]LoginModel model, string returnUrl = null)
+        public async Task<IActionResult> Login([FromForm] LoginModel model, string returnUrl = null)
         {
             if (ModelState.IsValid)
             {
@@ -66,11 +67,11 @@ namespace SeedModules.Account.Controllers
                 {
                     ModelState.AddModelError(string.Empty, T["Invalid login attempt."]);
                     await _accountEvents.InvokeAsync(a => a.LoggingInFailedAsync(model.UserName), _logger);
-                    return this.Spa("login.html");
+                    return this.Spa("index.html");
                 }
             }
 
-            return this.Spa("login.html");
+            return this.Spa("index.html");
         }
 
         [HttpGet]

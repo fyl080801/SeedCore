@@ -124,8 +124,8 @@ namespace SeedModules.Account
             {
                 app.UseSpaDevelopment(builder =>
                 {
-                    builder.Server.SuccessRegx = "Project is running at";
-                    builder.UseSpaDevelopmentServer("start");
+                    builder.Server.SuccessRegx = "Vite dev server running at";
+                    builder.UseSpaDevelopmentServer("dev");
                 });
             }
         }

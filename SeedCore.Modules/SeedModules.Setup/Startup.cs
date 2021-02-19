@@ -23,15 +23,15 @@ namespace SeedModules.Setup
                 name: "Setup",
                 areaName: "SeedModules.Setup",
                 pattern: "",
-                defaults: new { controller = "Setup", action = "Index" }
+                defaults: new { controller = "Home", action = "Index" }
             );
 
             if (env.IsDevelopment())
             {
                 app.UseSpaDevelopment(builder =>
                 {
-                    builder.Server.SuccessRegx = "Project is running at";
-                    builder.UseSpaDevelopmentServer("start");
+                    builder.Server.SuccessRegx = "Vite dev server running at";
+                    builder.UseSpaDevelopmentServer("dev");
                 });
             }
         }

@@ -19,7 +19,7 @@ namespace Microsoft.AspNetCore.Mvc
         /// <returns></returns>
         public static async Task<IActionResult> SpaAsync(this Controller controller, string module, string file)
         {
-            var env = controller.ControllerContext.HttpContext.RequestServices.GetService<IHostEnvironment>();
+            var env = controller.HttpContext.RequestServices.GetService<IHostEnvironment>();
             var moduleName = module ?? controller.GetType().Assembly.GetName().Name;
 
             if (env.IsDevelopment() && SeedSpaBuilderExtensions.UrlHash.ContainsKey(moduleName))
@@ -35,7 +35,13 @@ namespace Microsoft.AspNetCore.Mvc
                     {
                         var responseReader = new StreamReader(responseStream, Encoding.GetEncoding(response.CharacterSet));
                         var responseText = responseReader.ReadToEnd();
+
+                        // var remoteCachePath = $"Views/Areas/{moduleName}/_cache/";
+                        // var partialMappedPath = Path.Combine(Environment.CurrentDirectory, remoteCachePath, file);
+                        // File.WriteAllText(partialMappedPath, responseText);
+                        // View("Cache", "")
                         return await Task.FromResult(controller.Content(responseText, response.ContentType));
+                        // return await Task.FromResult(controller.View(partialMappedPath));
                     }
                 }
             }

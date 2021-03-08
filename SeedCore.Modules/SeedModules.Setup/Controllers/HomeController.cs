@@ -7,7 +7,7 @@ namespace SeedModules.Setup.Controllers
         [AppendAntiforgeryToken]
         public IActionResult Index()
         {
-            return View();
+            return this.Spa("index.html");
         }
     }
 }
